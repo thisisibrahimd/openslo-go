@@ -1,7 +1,8 @@
-openslo_spec_dir := "pkg/openslo/spec"
+openslo_spec_dir := "pkg/openslo"
 openslo_schema_dir := "openslo/schemas"
 
-gen-spec:
+gen-v1-spec:
+	mkdir -p {{ openslo_spec_dir }}/v1
 	quicktype --quiet --telemetry disable --just-types -l go -s schema -o {{ openslo_spec_dir }}/v1/openslo_v1.go --package openslo_v1 \
 	    {{ openslo_schema_dir }}/v1/alertcondition.schema.json \
 	    {{ openslo_schema_dir }}/v1/alertnotificationtarget.schema.json \
