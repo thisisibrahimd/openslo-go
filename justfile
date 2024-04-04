@@ -3,7 +3,7 @@ openslo_schema_dir := "openslo/schemas"
 
 gen-v1-spec:
 	mkdir -p {{ openslo_spec_dir }}/v1
-	quicktype --quiet --telemetry disable -l go -s schema -o {{ openslo_spec_dir }}/v1/openslo_v1.go --package openslo_v1 \
+	quicktype --quiet --telemetry disable --field-tags yaml,json --omit-empty -l go -s schema -o {{ openslo_spec_dir }}/v1/openslo_v1.go --package openslo_v1 \
 	    {{ openslo_schema_dir }}/v1/alertcondition.schema.json \
 	    {{ openslo_schema_dir }}/v1/alertnotificationtarget.schema.json \
 	    {{ openslo_schema_dir }}/v1/alertpolicy.schema.json \
