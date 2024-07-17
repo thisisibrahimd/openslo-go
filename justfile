@@ -10,6 +10,8 @@ gen-v1-spec:
 		-g go \
 		-o {{ openslo_spec_dir }}/v1 \
 		--inline-schema-name-mappings AlertPolicyCondition_inner=AlertPolicyCondition,AlertPolicyNotificationTarget_inner=AlertPolicyNotificationTarget \
-		--global-property models,modelDocs=false \
-		--package-name openslo_v1
-
+		--global-property models,modelDocs=false,supportingFiles \
+		--package-name openslo_v1 \
+		--model-package openslo_v1
+	rm {{ openslo_spec_dir }}/v1/.openapi-generator/VERSION {{ openslo_spec_dir }}/v1/.openapi-generator/FILES
+	rmdir {{ openslo_spec_dir }}/v1/.openapi-generator
