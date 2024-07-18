@@ -26,7 +26,7 @@ jobs:
         go-version: '1.22.5'
 
     - run: |
-        gofmt -e ./..
+        gofmt -d -e ./..
     
   lint:
     needs: [format]
