@@ -11,8 +11,8 @@ API version: 1.0.0
 package openslo_v1
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -21,9 +21,9 @@ var _ MappedNullable = &Metadata{}
 
 // Metadata struct for Metadata
 type Metadata struct {
-	Name string `json:"name" validate:"regexp=^[a-z0-9][a-z0-9.|\\/\\\\\\\\-]*[a-z0-9]*$"`
-	DisplayName *string `json:"displayName,omitempty"`
-	Labels *map[string]string `json:"labels,omitempty"`
+	Name        string             `json:"name" validate:"regexp=^[a-z0-9][a-z0-9.|\\/\\\\\\\\-]*[a-z0-9]*$"`
+	DisplayName *string            `json:"displayName,omitempty"`
+	Labels      *map[string]string `json:"labels,omitempty"`
 	Annotations *map[string]string `json:"annotations,omitempty"`
 }
 
@@ -168,7 +168,7 @@ func (o *Metadata) SetAnnotations(v map[string]string) {
 }
 
 func (o Metadata) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -203,10 +203,10 @@ func (o *Metadata) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -262,5 +262,3 @@ func (v *NullableMetadata) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

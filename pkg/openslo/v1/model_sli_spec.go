@@ -19,9 +19,9 @@ var _ MappedNullable = &SliSpec{}
 
 // SliSpec struct for SliSpec
 type SliSpec struct {
-	Description *string `json:"description,omitempty"`
+	Description     *string          `json:"description,omitempty"`
 	ThresholdMetric *ThresholdMetric `json:"thresholdMetric,omitempty"`
-	RatioMetric *RatioMetric `json:"ratioMetric,omitempty"`
+	RatioMetric     *RatioMetric     `json:"ratioMetric,omitempty"`
 }
 
 // NewSliSpec instantiates a new SliSpec object
@@ -138,7 +138,7 @@ func (o *SliSpec) SetRatioMetric(v RatioMetric) {
 }
 
 func (o SliSpec) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -194,5 +194,3 @@ func (v *NullableSliSpec) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

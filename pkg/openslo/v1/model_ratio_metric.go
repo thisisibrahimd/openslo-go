@@ -19,10 +19,10 @@ var _ MappedNullable = &RatioMetric{}
 
 // RatioMetric struct for RatioMetric
 type RatioMetric struct {
-	Counter *bool `json:"counter,omitempty"`
-	Good *GoodRatioMetric `json:"good,omitempty"`
-	Bad *BadRatioMetric `json:"bad,omitempty"`
-	Total *TotalRatioMetric `json:"total,omitempty"`
+	Counter *bool             `json:"counter,omitempty"`
+	Good    *GoodRatioMetric  `json:"good,omitempty"`
+	Bad     *BadRatioMetric   `json:"bad,omitempty"`
+	Total   *TotalRatioMetric `json:"total,omitempty"`
 }
 
 // NewRatioMetric instantiates a new RatioMetric object
@@ -171,7 +171,7 @@ func (o *RatioMetric) SetTotal(v TotalRatioMetric) {
 }
 
 func (o RatioMetric) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -230,5 +230,3 @@ func (v *NullableRatioMetric) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

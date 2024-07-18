@@ -19,7 +19,7 @@ var _ MappedNullable = &DatasourceSpec{}
 
 // DatasourceSpec struct for DatasourceSpec
 type DatasourceSpec struct {
-	Type *string `json:"type,omitempty"`
+	Type              *string                `json:"type,omitempty"`
 	ConnectionDetails map[string]interface{} `json:"connectionDetails,omitempty"`
 }
 
@@ -105,7 +105,7 @@ func (o *DatasourceSpec) SetConnectionDetails(v map[string]interface{}) {
 }
 
 func (o DatasourceSpec) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,5 +158,3 @@ func (v *NullableDatasourceSpec) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

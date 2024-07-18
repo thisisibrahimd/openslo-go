@@ -20,9 +20,9 @@ var _ MappedNullable = &AlertPolicy{}
 // AlertPolicy struct for AlertPolicy
 type AlertPolicy struct {
 	ApiVersion *OpensloApiVersion `json:"apiVersion,omitempty"`
-	Kind *string `json:"kind,omitempty"`
-	Metadata *Metadata `json:"metadata,omitempty"`
-	Spec *AlertPolicySpec `json:"spec,omitempty"`
+	Kind       *string            `json:"kind,omitempty"`
+	Metadata   *Metadata          `json:"metadata,omitempty"`
+	Spec       *AlertPolicySpec   `json:"spec,omitempty"`
 }
 
 // NewAlertPolicy instantiates a new AlertPolicy object
@@ -171,7 +171,7 @@ func (o *AlertPolicy) SetSpec(v AlertPolicySpec) {
 }
 
 func (o AlertPolicy) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -230,5 +230,3 @@ func (v *NullableAlertPolicy) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -20,7 +20,7 @@ var _ MappedNullable = &TimeWindowCalendar{}
 // TimeWindowCalendar struct for TimeWindowCalendar
 type TimeWindowCalendar struct {
 	StartTime *string `json:"startTime,omitempty" validate:"regexp=^\\\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01]) ([01]\\\\d|2[0-3]):[0-5]\\\\d:[0-5]\\\\d$"`
-	TimeZone *string `json:"timeZone,omitempty" validate:"regexp=[A-Z][a-zA-Z_]+\\/[A-Z][a-zA-Z_]+"`
+	TimeZone  *string `json:"timeZone,omitempty" validate:"regexp=[A-Z][a-zA-Z_]+\\/[A-Z][a-zA-Z_]+"`
 }
 
 // NewTimeWindowCalendar instantiates a new TimeWindowCalendar object
@@ -105,7 +105,7 @@ func (o *TimeWindowCalendar) SetTimeZone(v string) {
 }
 
 func (o TimeWindowCalendar) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,5 +158,3 @@ func (v *NullableTimeWindowCalendar) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

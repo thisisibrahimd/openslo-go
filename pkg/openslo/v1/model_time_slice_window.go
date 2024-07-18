@@ -12,14 +12,14 @@ package openslo_v1
 
 import (
 	"encoding/json"
-	"gopkg.in/validator.v2"
 	"fmt"
+	"gopkg.in/validator.v2"
 )
 
 // TimeSliceWindow - struct for TimeSliceWindow
 type TimeSliceWindow struct {
 	Float32 *float32
-	String *string
+	String  *string
 }
 
 // float32AsTimeSliceWindow is a convenience function that returns float32 wrapped in TimeSliceWindow
@@ -35,7 +35,6 @@ func StringAsTimeSliceWindow(v *string) TimeSliceWindow {
 		String: v,
 	}
 }
-
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *TimeSliceWindow) UnmarshalJSON(data []byte) error {
@@ -102,7 +101,7 @@ func (src TimeSliceWindow) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *TimeSliceWindow) GetActualInstance() (interface{}) {
+func (obj *TimeSliceWindow) GetActualInstance() interface{} {
 	if obj == nil {
 		return nil
 	}
@@ -153,5 +152,3 @@ func (v *NullableTimeSliceWindow) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -19,10 +19,10 @@ var _ MappedNullable = &AlertCondition{}
 
 // AlertCondition struct for AlertCondition
 type AlertCondition struct {
-	ApiVersion *OpensloApiVersion `json:"apiVersion,omitempty"`
-	Kind *string `json:"kind,omitempty"`
-	Metadata *Metadata `json:"metadata,omitempty"`
-	Spec *AlertConditionSpec `json:"spec,omitempty"`
+	ApiVersion *OpensloApiVersion  `json:"apiVersion,omitempty"`
+	Kind       *string             `json:"kind,omitempty"`
+	Metadata   *Metadata           `json:"metadata,omitempty"`
+	Spec       *AlertConditionSpec `json:"spec,omitempty"`
 }
 
 // NewAlertCondition instantiates a new AlertCondition object
@@ -171,7 +171,7 @@ func (o *AlertCondition) SetSpec(v AlertConditionSpec) {
 }
 
 func (o AlertCondition) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -230,5 +230,3 @@ func (v *NullableAlertCondition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

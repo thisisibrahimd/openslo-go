@@ -11,8 +11,8 @@ API version: 1.0.0
 package openslo_v1
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -21,13 +21,13 @@ var _ MappedNullable = &SloSpec{}
 
 // SloSpec struct for SloSpec
 type SloSpec struct {
-	Description *string `json:"description,omitempty"`
-	Service string `json:"service" validate:"regexp=^[a-z0-9][a-z0-9.|\\/\\\\\\\\-]*[a-z0-9]*$"`
-	Indicator *SLIInline `json:"indicator,omitempty"`
-	IndicatorRef *string `json:"indicatorRef,omitempty" validate:"regexp=^[a-z0-9][a-z0-9.|\\/\\\\\\\\-]*[a-z0-9]*$"`
-	TimeWindow *TimeWindow `json:"timeWindow,omitempty"`
-	BudgetingMethod string `json:"budgetingMethod"`
-	Objectives []SloObjective `json:"objectives"`
+	Description     *string        `json:"description,omitempty"`
+	Service         string         `json:"service" validate:"regexp=^[a-z0-9][a-z0-9.|\\/\\\\\\\\-]*[a-z0-9]*$"`
+	Indicator       *SLIInline     `json:"indicator,omitempty"`
+	IndicatorRef    *string        `json:"indicatorRef,omitempty" validate:"regexp=^[a-z0-9][a-z0-9.|\\/\\\\\\\\-]*[a-z0-9]*$"`
+	TimeWindow      *TimeWindow    `json:"timeWindow,omitempty"`
+	BudgetingMethod string         `json:"budgetingMethod"`
+	Objectives      []SloObjective `json:"objectives"`
 }
 
 type _SloSpec SloSpec
@@ -253,7 +253,7 @@ func (o *SloSpec) SetObjectives(v []SloObjective) {
 }
 
 func (o SloSpec) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -295,10 +295,10 @@ func (o *SloSpec) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -354,5 +354,3 @@ func (v *NullableSloSpec) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -22,8 +22,8 @@ type Operation string
 const (
 	LTE Operation = "lte"
 	GTE Operation = "gte"
-	LT Operation = "lt"
-	GT Operation = "gt"
+	LT  Operation = "lt"
+	GT  Operation = "gt"
 )
 
 // All allowed values of Operation enum
@@ -112,4 +112,3 @@ func (v *NullableOperation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

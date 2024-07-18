@@ -20,9 +20,9 @@ var _ MappedNullable = &Slo{}
 // Slo struct for Slo
 type Slo struct {
 	ApiVersion *OpensloApiVersion `json:"apiVersion,omitempty"`
-	Kind *string `json:"kind,omitempty"`
-	Metadata *Metadata `json:"metadata,omitempty"`
-	Spec *SloSpec `json:"spec,omitempty"`
+	Kind       *string            `json:"kind,omitempty"`
+	Metadata   *Metadata          `json:"metadata,omitempty"`
+	Spec       *SloSpec           `json:"spec,omitempty"`
 }
 
 // NewSlo instantiates a new Slo object
@@ -171,7 +171,7 @@ func (o *Slo) SetSpec(v SloSpec) {
 }
 
 func (o Slo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -230,5 +230,3 @@ func (v *NullableSlo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

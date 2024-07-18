@@ -19,11 +19,11 @@ var _ MappedNullable = &AlertConditionSpecInline{}
 
 // AlertConditionSpecInline struct for AlertConditionSpecInline
 type AlertConditionSpecInline struct {
-	Kind *string `json:"kind,omitempty"`
-	Op *Operation `json:"op,omitempty"`
-	Threshold *float32 `json:"threshold,omitempty"`
-	LoopbackWindow *string `json:"loopbackWindow,omitempty" validate:"regexp=^[1-9][0-9]*[mhdwMQY]$"`
-	AlertAfter *string `json:"alertAfter,omitempty" validate:"regexp=^[1-9][0-9]*[mhdwMQY]$"`
+	Kind           *string    `json:"kind,omitempty"`
+	Op             *Operation `json:"op,omitempty"`
+	Threshold      *float32   `json:"threshold,omitempty"`
+	LoopbackWindow *string    `json:"loopbackWindow,omitempty" validate:"regexp=^[1-9][0-9]*[mhdwMQY]$"`
+	AlertAfter     *string    `json:"alertAfter,omitempty" validate:"regexp=^[1-9][0-9]*[mhdwMQY]$"`
 }
 
 // NewAlertConditionSpecInline instantiates a new AlertConditionSpecInline object
@@ -204,7 +204,7 @@ func (o *AlertConditionSpecInline) SetAlertAfter(v string) {
 }
 
 func (o AlertConditionSpecInline) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -266,5 +266,3 @@ func (v *NullableAlertConditionSpecInline) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -19,9 +19,9 @@ var _ MappedNullable = &MetricSource{}
 
 // MetricSource struct for MetricSource
 type MetricSource struct {
-	MetricSourceRef *string `json:"metricSourceRef,omitempty" validate:"regexp=^[a-z0-9][a-z0-9.|\\/\\\\\\\\-]*[a-z0-9]*$"`
-	Type *string `json:"type,omitempty"`
-	Spec map[string]interface{} `json:"spec,omitempty"`
+	MetricSourceRef *string                `json:"metricSourceRef,omitempty" validate:"regexp=^[a-z0-9][a-z0-9.|\\/\\\\\\\\-]*[a-z0-9]*$"`
+	Type            *string                `json:"type,omitempty"`
+	Spec            map[string]interface{} `json:"spec,omitempty"`
 }
 
 // NewMetricSource instantiates a new MetricSource object
@@ -138,7 +138,7 @@ func (o *MetricSource) SetSpec(v map[string]interface{}) {
 }
 
 func (o MetricSource) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -194,5 +194,3 @@ func (v *NullableMetricSource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

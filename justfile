@@ -4,7 +4,7 @@ openapi_schema_url := "https://raw.githubusercontent.com/thisisibrahimd/OpenSLO/
 gen: gen-v1-spec
 
 gen-v1-spec:
-	GO_POST_PROCESS_FILE="/usr/local/bin/gofmt -w" openapi-generator \
+	GO_POST_PROCESS_FILE="$(which gofmt) -w" openapi-generator \
 		generate \
 		-i {{ openapi_schema_url }} \
 		-g go \
@@ -12,6 +12,7 @@ gen-v1-spec:
 		--inline-schema-name-mappings AlertPolicyCondition_inner=AlertPolicyCondition,AlertPolicyNotificationTarget_inner=AlertPolicyNotificationTarget \
 		--global-property models,modelDocs=false,supportingFiles \
 		--package-name openslo_v1 \
-		--model-package openslo_v1
+		--model-package openslo_v1 \
+		--enable-post-process-file
 	rm {{ openslo_spec_dir }}/v1/.openapi-generator/VERSION {{ openslo_spec_dir }}/v1/.openapi-generator/FILES
 	rmdir {{ openslo_spec_dir }}/v1/.openapi-generator

@@ -19,13 +19,13 @@ var _ MappedNullable = &SloObjective{}
 
 // SloObjective struct for SloObjective
 type SloObjective struct {
-	DisplayName *string `json:"displayName,omitempty"`
-	Op *Operation `json:"op,omitempty"`
-	Value *float32 `json:"value,omitempty"`
-	Target *float32 `json:"target,omitempty"`
-	TimeSliceTarget *float32 `json:"timeSliceTarget,omitempty"`
+	DisplayName     *string          `json:"displayName,omitempty"`
+	Op              *Operation       `json:"op,omitempty"`
+	Value           *float32         `json:"value,omitempty"`
+	Target          *float32         `json:"target,omitempty"`
+	TimeSliceTarget *float32         `json:"timeSliceTarget,omitempty"`
 	TimeSliceWindow *TimeSliceWindow `json:"timeSliceWindow,omitempty"`
-	AlertPolicies []string `json:"alertPolicies,omitempty"`
+	AlertPolicies   []string         `json:"alertPolicies,omitempty"`
 }
 
 // NewSloObjective instantiates a new SloObjective object
@@ -270,7 +270,7 @@ func (o *SloObjective) SetAlertPolicies(v []string) {
 }
 
 func (o SloObjective) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -338,5 +338,3 @@ func (v *NullableSloObjective) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

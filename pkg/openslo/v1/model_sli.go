@@ -20,9 +20,9 @@ var _ MappedNullable = &Sli{}
 // Sli struct for Sli
 type Sli struct {
 	ApiVersion *OpensloApiVersion `json:"apiVersion,omitempty"`
-	Kind *string `json:"kind,omitempty"`
-	Metadata *Metadata `json:"metadata,omitempty"`
-	Spec *SliSpec `json:"spec,omitempty"`
+	Kind       *string            `json:"kind,omitempty"`
+	Metadata   *Metadata          `json:"metadata,omitempty"`
+	Spec       *SliSpec           `json:"spec,omitempty"`
 }
 
 // NewSli instantiates a new Sli object
@@ -171,7 +171,7 @@ func (o *Sli) SetSpec(v SliSpec) {
 }
 
 func (o Sli) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -230,5 +230,3 @@ func (v *NullableSli) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

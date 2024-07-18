@@ -20,7 +20,7 @@ var _ MappedNullable = &SLIInline{}
 // SLIInline struct for SLIInline
 type SLIInline struct {
 	Metadata *Metadata `json:"metadata,omitempty"`
-	Spec *SliSpec `json:"spec,omitempty"`
+	Spec     *SliSpec  `json:"spec,omitempty"`
 }
 
 // NewSLIInline instantiates a new SLIInline object
@@ -105,7 +105,7 @@ func (o *SLIInline) SetSpec(v SliSpec) {
 }
 
 func (o SLIInline) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,5 +158,3 @@ func (v *NullableSLIInline) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

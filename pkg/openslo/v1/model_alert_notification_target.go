@@ -19,10 +19,10 @@ var _ MappedNullable = &AlertNotificationTarget{}
 
 // AlertNotificationTarget struct for AlertNotificationTarget
 type AlertNotificationTarget struct {
-	ApiVersion *OpensloApiVersion `json:"apiVersion,omitempty"`
-	Kind *string `json:"kind,omitempty"`
-	Metadata *Metadata `json:"metadata,omitempty"`
-	Spec *AlertNotificationTargetSpec `json:"spec,omitempty"`
+	ApiVersion *OpensloApiVersion           `json:"apiVersion,omitempty"`
+	Kind       *string                      `json:"kind,omitempty"`
+	Metadata   *Metadata                    `json:"metadata,omitempty"`
+	Spec       *AlertNotificationTargetSpec `json:"spec,omitempty"`
 }
 
 // NewAlertNotificationTarget instantiates a new AlertNotificationTarget object
@@ -171,7 +171,7 @@ func (o *AlertNotificationTarget) SetSpec(v AlertNotificationTargetSpec) {
 }
 
 func (o AlertNotificationTarget) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -230,5 +230,3 @@ func (v *NullableAlertNotificationTarget) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

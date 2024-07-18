@@ -20,9 +20,9 @@ var _ MappedNullable = &Datasource{}
 // Datasource struct for Datasource
 type Datasource struct {
 	ApiVersion *OpensloApiVersion `json:"apiVersion,omitempty"`
-	Kind *string `json:"kind,omitempty"`
-	Metadata *Metadata `json:"metadata,omitempty"`
-	Spec *ServiceSpec `json:"spec,omitempty"`
+	Kind       *string            `json:"kind,omitempty"`
+	Metadata   *Metadata          `json:"metadata,omitempty"`
+	Spec       *ServiceSpec       `json:"spec,omitempty"`
 }
 
 // NewDatasource instantiates a new Datasource object
@@ -171,7 +171,7 @@ func (o *Datasource) SetSpec(v ServiceSpec) {
 }
 
 func (o Datasource) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -230,5 +230,3 @@ func (v *NullableDatasource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -20,9 +20,9 @@ var _ MappedNullable = &Service{}
 // Service struct for Service
 type Service struct {
 	ApiVersion *OpensloApiVersion `json:"apiVersion,omitempty"`
-	Kind *string `json:"kind,omitempty"`
-	Metadata *Metadata `json:"metadata,omitempty"`
-	Spec *ServiceSpec `json:"spec,omitempty"`
+	Kind       *string            `json:"kind,omitempty"`
+	Metadata   *Metadata          `json:"metadata,omitempty"`
+	Spec       *ServiceSpec       `json:"spec,omitempty"`
 }
 
 // NewService instantiates a new Service object
@@ -171,7 +171,7 @@ func (o *Service) SetSpec(v ServiceSpec) {
 }
 
 func (o Service) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -230,5 +230,3 @@ func (v *NullableService) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
