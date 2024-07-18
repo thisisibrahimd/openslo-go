@@ -1,3 +1,4 @@
 [tools]
 just = "latest"
 go = "1.22.5"
+golangci-lint = "latest"
