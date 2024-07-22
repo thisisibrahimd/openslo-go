@@ -22,7 +22,7 @@ var _ MappedNullable = &Generic{}
 // Generic struct for Generic
 type Generic struct {
 	ApiVersion OpensloApiVersion      `json:"apiVersion"`
-	Kind       GenericKind            `json:"kind"`
+	Kind       string                 `json:"kind"`
 	Metadata   Metadata               `json:"metadata"`
 	Spec       map[string]interface{} `json:"spec"`
 }
@@ -33,7 +33,7 @@ type _Generic Generic
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGeneric(apiVersion OpensloApiVersion, kind GenericKind, metadata Metadata, spec map[string]interface{}) *Generic {
+func NewGeneric(apiVersion OpensloApiVersion, kind string, metadata Metadata, spec map[string]interface{}) *Generic {
 	this := Generic{}
 	this.ApiVersion = apiVersion
 	this.Kind = kind
@@ -75,9 +75,9 @@ func (o *Generic) SetApiVersion(v OpensloApiVersion) {
 }
 
 // GetKind returns the Kind field value
-func (o *Generic) GetKind() GenericKind {
+func (o *Generic) GetKind() string {
 	if o == nil {
-		var ret GenericKind
+		var ret string
 		return ret
 	}
 
@@ -86,7 +86,7 @@ func (o *Generic) GetKind() GenericKind {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *Generic) GetKindOk() (*GenericKind, bool) {
+func (o *Generic) GetKindOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -94,7 +94,7 @@ func (o *Generic) GetKindOk() (*GenericKind, bool) {
 }
 
 // SetKind sets field value
-func (o *Generic) SetKind(v GenericKind) {
+func (o *Generic) SetKind(v string) {
 	o.Kind = v
 }
 
