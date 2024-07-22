@@ -21,11 +21,11 @@ var _ MappedNullable = &AlertPolicyCondition{}
 
 // AlertPolicyCondition struct for AlertPolicyCondition
 type AlertPolicyCondition struct {
-	ApiVersion   OpensloApiVersion   `json:"apiVersion"`
-	Kind         AlertConditionKind  `json:"kind"`
-	Metadata     Metadata            `json:"metadata"`
-	Spec         *AlertConditionSpec `json:"spec,omitempty"`
-	ConditionRef *string             `json:"conditionRef,omitempty" validate:"regexp=^[a-z0-9][a-z0-9.|\\/\\\\\\\\-]*[a-z0-9]*$"`
+	ApiVersion   OpensloApiVersion  `json:"apiVersion"`
+	Kind         AlertConditionKind `json:"kind"`
+	Metadata     Metadata           `json:"metadata"`
+	Spec         AlertConditionSpec `json:"spec"`
+	ConditionRef *string            `json:"conditionRef,omitempty" validate:"regexp=^[a-z0-9][a-z0-9.|\\/\\\\\\\\-]*[a-z0-9]*$"`
 }
 
 type _AlertPolicyCondition AlertPolicyCondition
@@ -34,11 +34,12 @@ type _AlertPolicyCondition AlertPolicyCondition
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertPolicyCondition(apiVersion OpensloApiVersion, kind AlertConditionKind, metadata Metadata) *AlertPolicyCondition {
+func NewAlertPolicyCondition(apiVersion OpensloApiVersion, kind AlertConditionKind, metadata Metadata, spec AlertConditionSpec) *AlertPolicyCondition {
 	this := AlertPolicyCondition{}
 	this.ApiVersion = apiVersion
 	this.Kind = kind
 	this.Metadata = metadata
+	this.Spec = spec
 	return &this
 }
 
@@ -122,36 +123,28 @@ func (o *AlertPolicyCondition) SetMetadata(v Metadata) {
 	o.Metadata = v
 }
 
-// GetSpec returns the Spec field value if set, zero value otherwise.
+// GetSpec returns the Spec field value
 func (o *AlertPolicyCondition) GetSpec() AlertConditionSpec {
-	if o == nil || IsNil(o.Spec) {
+	if o == nil {
 		var ret AlertConditionSpec
 		return ret
 	}
-	return *o.Spec
+
+	return o.Spec
 }
 
-// GetSpecOk returns a tuple with the Spec field value if set, nil otherwise
+// GetSpecOk returns a tuple with the Spec field value
 // and a boolean to check if the value has been set.
 func (o *AlertPolicyCondition) GetSpecOk() (*AlertConditionSpec, bool) {
-	if o == nil || IsNil(o.Spec) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Spec, true
+	return &o.Spec, true
 }
 
-// HasSpec returns a boolean if a field has been set.
-func (o *AlertPolicyCondition) HasSpec() bool {
-	if o != nil && !IsNil(o.Spec) {
-		return true
-	}
-
-	return false
-}
-
-// SetSpec gets a reference to the given AlertConditionSpec and assigns it to the Spec field.
+// SetSpec sets field value
 func (o *AlertPolicyCondition) SetSpec(v AlertConditionSpec) {
-	o.Spec = &v
+	o.Spec = v
 }
 
 // GetConditionRef returns the ConditionRef field value if set, zero value otherwise.
@@ -199,9 +192,7 @@ func (o AlertPolicyCondition) ToMap() (map[string]interface{}, error) {
 	toSerialize["apiVersion"] = o.ApiVersion
 	toSerialize["kind"] = o.Kind
 	toSerialize["metadata"] = o.Metadata
-	if !IsNil(o.Spec) {
-		toSerialize["spec"] = o.Spec
-	}
+	toSerialize["spec"] = o.Spec
 	if !IsNil(o.ConditionRef) {
 		toSerialize["conditionRef"] = o.ConditionRef
 	}
@@ -216,6 +207,7 @@ func (o *AlertPolicyCondition) UnmarshalJSON(data []byte) (err error) {
 		"apiVersion",
 		"kind",
 		"metadata",
+		"spec",
 	}
 
 	allProperties := make(map[string]interface{})

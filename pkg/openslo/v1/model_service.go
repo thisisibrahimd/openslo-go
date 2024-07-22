@@ -24,7 +24,7 @@ type Service struct {
 	ApiVersion OpensloApiVersion `json:"apiVersion"`
 	Kind       ServiceKind       `json:"kind"`
 	Metadata   Metadata          `json:"metadata"`
-	Spec       *ServiceSpec      `json:"spec,omitempty"`
+	Spec       ServiceSpec       `json:"spec"`
 }
 
 type _Service Service
@@ -33,11 +33,12 @@ type _Service Service
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewService(apiVersion OpensloApiVersion, kind ServiceKind, metadata Metadata) *Service {
+func NewService(apiVersion OpensloApiVersion, kind ServiceKind, metadata Metadata, spec ServiceSpec) *Service {
 	this := Service{}
 	this.ApiVersion = apiVersion
 	this.Kind = kind
 	this.Metadata = metadata
+	this.Spec = spec
 	return &this
 }
 
@@ -121,36 +122,28 @@ func (o *Service) SetMetadata(v Metadata) {
 	o.Metadata = v
 }
 
-// GetSpec returns the Spec field value if set, zero value otherwise.
+// GetSpec returns the Spec field value
 func (o *Service) GetSpec() ServiceSpec {
-	if o == nil || IsNil(o.Spec) {
+	if o == nil {
 		var ret ServiceSpec
 		return ret
 	}
-	return *o.Spec
+
+	return o.Spec
 }
 
-// GetSpecOk returns a tuple with the Spec field value if set, nil otherwise
+// GetSpecOk returns a tuple with the Spec field value
 // and a boolean to check if the value has been set.
 func (o *Service) GetSpecOk() (*ServiceSpec, bool) {
-	if o == nil || IsNil(o.Spec) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Spec, true
+	return &o.Spec, true
 }
 
-// HasSpec returns a boolean if a field has been set.
-func (o *Service) HasSpec() bool {
-	if o != nil && !IsNil(o.Spec) {
-		return true
-	}
-
-	return false
-}
-
-// SetSpec gets a reference to the given ServiceSpec and assigns it to the Spec field.
+// SetSpec sets field value
 func (o *Service) SetSpec(v ServiceSpec) {
-	o.Spec = &v
+	o.Spec = v
 }
 
 func (o Service) MarshalJSON() ([]byte, error) {
@@ -166,9 +159,7 @@ func (o Service) ToMap() (map[string]interface{}, error) {
 	toSerialize["apiVersion"] = o.ApiVersion
 	toSerialize["kind"] = o.Kind
 	toSerialize["metadata"] = o.Metadata
-	if !IsNil(o.Spec) {
-		toSerialize["spec"] = o.Spec
-	}
+	toSerialize["spec"] = o.Spec
 	return toSerialize, nil
 }
 
@@ -180,6 +171,7 @@ func (o *Service) UnmarshalJSON(data []byte) (err error) {
 		"apiVersion",
 		"kind",
 		"metadata",
+		"spec",
 	}
 
 	allProperties := make(map[string]interface{})

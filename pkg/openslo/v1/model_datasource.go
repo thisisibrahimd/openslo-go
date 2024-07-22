@@ -24,7 +24,7 @@ type Datasource struct {
 	ApiVersion OpensloApiVersion `json:"apiVersion"`
 	Kind       DatasourceKind    `json:"kind"`
 	Metadata   Metadata          `json:"metadata"`
-	Spec       *ServiceSpec      `json:"spec,omitempty"`
+	Spec       ServiceSpec       `json:"spec"`
 }
 
 type _Datasource Datasource
@@ -33,11 +33,12 @@ type _Datasource Datasource
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDatasource(apiVersion OpensloApiVersion, kind DatasourceKind, metadata Metadata) *Datasource {
+func NewDatasource(apiVersion OpensloApiVersion, kind DatasourceKind, metadata Metadata, spec ServiceSpec) *Datasource {
 	this := Datasource{}
 	this.ApiVersion = apiVersion
 	this.Kind = kind
 	this.Metadata = metadata
+	this.Spec = spec
 	return &this
 }
 
@@ -121,36 +122,28 @@ func (o *Datasource) SetMetadata(v Metadata) {
 	o.Metadata = v
 }
 
-// GetSpec returns the Spec field value if set, zero value otherwise.
+// GetSpec returns the Spec field value
 func (o *Datasource) GetSpec() ServiceSpec {
-	if o == nil || IsNil(o.Spec) {
+	if o == nil {
 		var ret ServiceSpec
 		return ret
 	}
-	return *o.Spec
+
+	return o.Spec
 }
 
-// GetSpecOk returns a tuple with the Spec field value if set, nil otherwise
+// GetSpecOk returns a tuple with the Spec field value
 // and a boolean to check if the value has been set.
 func (o *Datasource) GetSpecOk() (*ServiceSpec, bool) {
-	if o == nil || IsNil(o.Spec) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Spec, true
+	return &o.Spec, true
 }
 
-// HasSpec returns a boolean if a field has been set.
-func (o *Datasource) HasSpec() bool {
-	if o != nil && !IsNil(o.Spec) {
-		return true
-	}
-
-	return false
-}
-
-// SetSpec gets a reference to the given ServiceSpec and assigns it to the Spec field.
+// SetSpec sets field value
 func (o *Datasource) SetSpec(v ServiceSpec) {
-	o.Spec = &v
+	o.Spec = v
 }
 
 func (o Datasource) MarshalJSON() ([]byte, error) {
@@ -166,9 +159,7 @@ func (o Datasource) ToMap() (map[string]interface{}, error) {
 	toSerialize["apiVersion"] = o.ApiVersion
 	toSerialize["kind"] = o.Kind
 	toSerialize["metadata"] = o.Metadata
-	if !IsNil(o.Spec) {
-		toSerialize["spec"] = o.Spec
-	}
+	toSerialize["spec"] = o.Spec
 	return toSerialize, nil
 }
 
@@ -180,6 +171,7 @@ func (o *Datasource) UnmarshalJSON(data []byte) (err error) {
 		"apiVersion",
 		"kind",
 		"metadata",
+		"spec",
 	}
 
 	allProperties := make(map[string]interface{})

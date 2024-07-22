@@ -21,10 +21,10 @@ var _ MappedNullable = &BudgetAdjustment{}
 
 // BudgetAdjustment struct for BudgetAdjustment
 type BudgetAdjustment struct {
-	ApiVersion OpensloApiVersion     `json:"apiVersion"`
-	Kind       BudgetAdjustmentKind  `json:"kind"`
-	Metadata   Metadata              `json:"metadata"`
-	Spec       *BudgetAdjustmentSpec `json:"spec,omitempty"`
+	ApiVersion OpensloApiVersion    `json:"apiVersion"`
+	Kind       BudgetAdjustmentKind `json:"kind"`
+	Metadata   Metadata             `json:"metadata"`
+	Spec       BudgetAdjustmentSpec `json:"spec"`
 }
 
 type _BudgetAdjustment BudgetAdjustment
@@ -33,11 +33,12 @@ type _BudgetAdjustment BudgetAdjustment
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBudgetAdjustment(apiVersion OpensloApiVersion, kind BudgetAdjustmentKind, metadata Metadata) *BudgetAdjustment {
+func NewBudgetAdjustment(apiVersion OpensloApiVersion, kind BudgetAdjustmentKind, metadata Metadata, spec BudgetAdjustmentSpec) *BudgetAdjustment {
 	this := BudgetAdjustment{}
 	this.ApiVersion = apiVersion
 	this.Kind = kind
 	this.Metadata = metadata
+	this.Spec = spec
 	return &this
 }
 
@@ -121,36 +122,28 @@ func (o *BudgetAdjustment) SetMetadata(v Metadata) {
 	o.Metadata = v
 }
 
-// GetSpec returns the Spec field value if set, zero value otherwise.
+// GetSpec returns the Spec field value
 func (o *BudgetAdjustment) GetSpec() BudgetAdjustmentSpec {
-	if o == nil || IsNil(o.Spec) {
+	if o == nil {
 		var ret BudgetAdjustmentSpec
 		return ret
 	}
-	return *o.Spec
+
+	return o.Spec
 }
 
-// GetSpecOk returns a tuple with the Spec field value if set, nil otherwise
+// GetSpecOk returns a tuple with the Spec field value
 // and a boolean to check if the value has been set.
 func (o *BudgetAdjustment) GetSpecOk() (*BudgetAdjustmentSpec, bool) {
-	if o == nil || IsNil(o.Spec) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Spec, true
+	return &o.Spec, true
 }
 
-// HasSpec returns a boolean if a field has been set.
-func (o *BudgetAdjustment) HasSpec() bool {
-	if o != nil && !IsNil(o.Spec) {
-		return true
-	}
-
-	return false
-}
-
-// SetSpec gets a reference to the given BudgetAdjustmentSpec and assigns it to the Spec field.
+// SetSpec sets field value
 func (o *BudgetAdjustment) SetSpec(v BudgetAdjustmentSpec) {
-	o.Spec = &v
+	o.Spec = v
 }
 
 func (o BudgetAdjustment) MarshalJSON() ([]byte, error) {
@@ -166,9 +159,7 @@ func (o BudgetAdjustment) ToMap() (map[string]interface{}, error) {
 	toSerialize["apiVersion"] = o.ApiVersion
 	toSerialize["kind"] = o.Kind
 	toSerialize["metadata"] = o.Metadata
-	if !IsNil(o.Spec) {
-		toSerialize["spec"] = o.Spec
-	}
+	toSerialize["spec"] = o.Spec
 	return toSerialize, nil
 }
 
@@ -180,6 +171,7 @@ func (o *BudgetAdjustment) UnmarshalJSON(data []byte) (err error) {
 		"apiVersion",
 		"kind",
 		"metadata",
+		"spec",
 	}
 
 	allProperties := make(map[string]interface{})

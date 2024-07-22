@@ -24,7 +24,7 @@ type AlertPolicy struct {
 	ApiVersion OpensloApiVersion `json:"apiVersion"`
 	Kind       AlertPolicyKind   `json:"kind"`
 	Metadata   Metadata          `json:"metadata"`
-	Spec       *AlertPolicySpec  `json:"spec,omitempty"`
+	Spec       AlertPolicySpec   `json:"spec"`
 }
 
 type _AlertPolicy AlertPolicy
@@ -33,11 +33,12 @@ type _AlertPolicy AlertPolicy
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertPolicy(apiVersion OpensloApiVersion, kind AlertPolicyKind, metadata Metadata) *AlertPolicy {
+func NewAlertPolicy(apiVersion OpensloApiVersion, kind AlertPolicyKind, metadata Metadata, spec AlertPolicySpec) *AlertPolicy {
 	this := AlertPolicy{}
 	this.ApiVersion = apiVersion
 	this.Kind = kind
 	this.Metadata = metadata
+	this.Spec = spec
 	return &this
 }
 
@@ -121,36 +122,28 @@ func (o *AlertPolicy) SetMetadata(v Metadata) {
 	o.Metadata = v
 }
 
-// GetSpec returns the Spec field value if set, zero value otherwise.
+// GetSpec returns the Spec field value
 func (o *AlertPolicy) GetSpec() AlertPolicySpec {
-	if o == nil || IsNil(o.Spec) {
+	if o == nil {
 		var ret AlertPolicySpec
 		return ret
 	}
-	return *o.Spec
+
+	return o.Spec
 }
 
-// GetSpecOk returns a tuple with the Spec field value if set, nil otherwise
+// GetSpecOk returns a tuple with the Spec field value
 // and a boolean to check if the value has been set.
 func (o *AlertPolicy) GetSpecOk() (*AlertPolicySpec, bool) {
-	if o == nil || IsNil(o.Spec) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Spec, true
+	return &o.Spec, true
 }
 
-// HasSpec returns a boolean if a field has been set.
-func (o *AlertPolicy) HasSpec() bool {
-	if o != nil && !IsNil(o.Spec) {
-		return true
-	}
-
-	return false
-}
-
-// SetSpec gets a reference to the given AlertPolicySpec and assigns it to the Spec field.
+// SetSpec sets field value
 func (o *AlertPolicy) SetSpec(v AlertPolicySpec) {
-	o.Spec = &v
+	o.Spec = v
 }
 
 func (o AlertPolicy) MarshalJSON() ([]byte, error) {
@@ -166,9 +159,7 @@ func (o AlertPolicy) ToMap() (map[string]interface{}, error) {
 	toSerialize["apiVersion"] = o.ApiVersion
 	toSerialize["kind"] = o.Kind
 	toSerialize["metadata"] = o.Metadata
-	if !IsNil(o.Spec) {
-		toSerialize["spec"] = o.Spec
-	}
+	toSerialize["spec"] = o.Spec
 	return toSerialize, nil
 }
 
@@ -180,6 +171,7 @@ func (o *AlertPolicy) UnmarshalJSON(data []byte) (err error) {
 		"apiVersion",
 		"kind",
 		"metadata",
+		"spec",
 	}
 
 	allProperties := make(map[string]interface{})

@@ -21,11 +21,11 @@ var _ MappedNullable = &AlertPolicyNotificationTarget{}
 
 // AlertPolicyNotificationTarget struct for AlertPolicyNotificationTarget
 type AlertPolicyNotificationTarget struct {
-	ApiVersion OpensloApiVersion            `json:"apiVersion"`
-	Kind       AlertNotificationTargetKind  `json:"kind"`
-	Metadata   Metadata                     `json:"metadata"`
-	Spec       *AlertNotificationTargetSpec `json:"spec,omitempty"`
-	TargetRef  *string                      `json:"targetRef,omitempty" validate:"regexp=^[a-z0-9][a-z0-9.|\\/\\\\\\\\-]*[a-z0-9]*$"`
+	ApiVersion OpensloApiVersion           `json:"apiVersion"`
+	Kind       AlertNotificationTargetKind `json:"kind"`
+	Metadata   Metadata                    `json:"metadata"`
+	Spec       AlertNotificationTargetSpec `json:"spec"`
+	TargetRef  *string                     `json:"targetRef,omitempty" validate:"regexp=^[a-z0-9][a-z0-9.|\\/\\\\\\\\-]*[a-z0-9]*$"`
 }
 
 type _AlertPolicyNotificationTarget AlertPolicyNotificationTarget
@@ -34,11 +34,12 @@ type _AlertPolicyNotificationTarget AlertPolicyNotificationTarget
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertPolicyNotificationTarget(apiVersion OpensloApiVersion, kind AlertNotificationTargetKind, metadata Metadata) *AlertPolicyNotificationTarget {
+func NewAlertPolicyNotificationTarget(apiVersion OpensloApiVersion, kind AlertNotificationTargetKind, metadata Metadata, spec AlertNotificationTargetSpec) *AlertPolicyNotificationTarget {
 	this := AlertPolicyNotificationTarget{}
 	this.ApiVersion = apiVersion
 	this.Kind = kind
 	this.Metadata = metadata
+	this.Spec = spec
 	return &this
 }
 
@@ -122,36 +123,28 @@ func (o *AlertPolicyNotificationTarget) SetMetadata(v Metadata) {
 	o.Metadata = v
 }
 
-// GetSpec returns the Spec field value if set, zero value otherwise.
+// GetSpec returns the Spec field value
 func (o *AlertPolicyNotificationTarget) GetSpec() AlertNotificationTargetSpec {
-	if o == nil || IsNil(o.Spec) {
+	if o == nil {
 		var ret AlertNotificationTargetSpec
 		return ret
 	}
-	return *o.Spec
+
+	return o.Spec
 }
 
-// GetSpecOk returns a tuple with the Spec field value if set, nil otherwise
+// GetSpecOk returns a tuple with the Spec field value
 // and a boolean to check if the value has been set.
 func (o *AlertPolicyNotificationTarget) GetSpecOk() (*AlertNotificationTargetSpec, bool) {
-	if o == nil || IsNil(o.Spec) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Spec, true
+	return &o.Spec, true
 }
 
-// HasSpec returns a boolean if a field has been set.
-func (o *AlertPolicyNotificationTarget) HasSpec() bool {
-	if o != nil && !IsNil(o.Spec) {
-		return true
-	}
-
-	return false
-}
-
-// SetSpec gets a reference to the given AlertNotificationTargetSpec and assigns it to the Spec field.
+// SetSpec sets field value
 func (o *AlertPolicyNotificationTarget) SetSpec(v AlertNotificationTargetSpec) {
-	o.Spec = &v
+	o.Spec = v
 }
 
 // GetTargetRef returns the TargetRef field value if set, zero value otherwise.
@@ -199,9 +192,7 @@ func (o AlertPolicyNotificationTarget) ToMap() (map[string]interface{}, error) {
 	toSerialize["apiVersion"] = o.ApiVersion
 	toSerialize["kind"] = o.Kind
 	toSerialize["metadata"] = o.Metadata
-	if !IsNil(o.Spec) {
-		toSerialize["spec"] = o.Spec
-	}
+	toSerialize["spec"] = o.Spec
 	if !IsNil(o.TargetRef) {
 		toSerialize["targetRef"] = o.TargetRef
 	}
@@ -216,6 +207,7 @@ func (o *AlertPolicyNotificationTarget) UnmarshalJSON(data []byte) (err error) {
 		"apiVersion",
 		"kind",
 		"metadata",
+		"spec",
 	}
 
 	allProperties := make(map[string]interface{})
