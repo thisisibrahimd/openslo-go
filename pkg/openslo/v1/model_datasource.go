@@ -22,7 +22,7 @@ var _ MappedNullable = &Datasource{}
 // Datasource struct for Datasource
 type Datasource struct {
 	ApiVersion OpensloApiVersion `json:"apiVersion"`
-	Kind       string            `json:"kind"`
+	Kind       DatasourceKind    `json:"kind"`
 	Metadata   Metadata          `json:"metadata"`
 	Spec       *ServiceSpec      `json:"spec,omitempty"`
 }
@@ -33,7 +33,7 @@ type _Datasource Datasource
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDatasource(apiVersion OpensloApiVersion, kind string, metadata Metadata) *Datasource {
+func NewDatasource(apiVersion OpensloApiVersion, kind DatasourceKind, metadata Metadata) *Datasource {
 	this := Datasource{}
 	this.ApiVersion = apiVersion
 	this.Kind = kind
@@ -74,9 +74,9 @@ func (o *Datasource) SetApiVersion(v OpensloApiVersion) {
 }
 
 // GetKind returns the Kind field value
-func (o *Datasource) GetKind() string {
+func (o *Datasource) GetKind() DatasourceKind {
 	if o == nil {
-		var ret string
+		var ret DatasourceKind
 		return ret
 	}
 
@@ -85,7 +85,7 @@ func (o *Datasource) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *Datasource) GetKindOk() (*string, bool) {
+func (o *Datasource) GetKindOk() (*DatasourceKind, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -93,7 +93,7 @@ func (o *Datasource) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *Datasource) SetKind(v string) {
+func (o *Datasource) SetKind(v DatasourceKind) {
 	o.Kind = v
 }
 

@@ -22,7 +22,7 @@ var _ MappedNullable = &AlertNotificationTarget{}
 // AlertNotificationTarget struct for AlertNotificationTarget
 type AlertNotificationTarget struct {
 	ApiVersion OpensloApiVersion            `json:"apiVersion"`
-	Kind       string                       `json:"kind"`
+	Kind       AlertNotificationTargetKind  `json:"kind"`
 	Metadata   Metadata                     `json:"metadata"`
 	Spec       *AlertNotificationTargetSpec `json:"spec,omitempty"`
 }
@@ -33,7 +33,7 @@ type _AlertNotificationTarget AlertNotificationTarget
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertNotificationTarget(apiVersion OpensloApiVersion, kind string, metadata Metadata) *AlertNotificationTarget {
+func NewAlertNotificationTarget(apiVersion OpensloApiVersion, kind AlertNotificationTargetKind, metadata Metadata) *AlertNotificationTarget {
 	this := AlertNotificationTarget{}
 	this.ApiVersion = apiVersion
 	this.Kind = kind
@@ -74,9 +74,9 @@ func (o *AlertNotificationTarget) SetApiVersion(v OpensloApiVersion) {
 }
 
 // GetKind returns the Kind field value
-func (o *AlertNotificationTarget) GetKind() string {
+func (o *AlertNotificationTarget) GetKind() AlertNotificationTargetKind {
 	if o == nil {
-		var ret string
+		var ret AlertNotificationTargetKind
 		return ret
 	}
 
@@ -85,7 +85,7 @@ func (o *AlertNotificationTarget) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *AlertNotificationTarget) GetKindOk() (*string, bool) {
+func (o *AlertNotificationTarget) GetKindOk() (*AlertNotificationTargetKind, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -93,7 +93,7 @@ func (o *AlertNotificationTarget) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *AlertNotificationTarget) SetKind(v string) {
+func (o *AlertNotificationTarget) SetKind(v AlertNotificationTargetKind) {
 	o.Kind = v
 }
 

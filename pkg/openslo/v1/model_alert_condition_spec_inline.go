@@ -19,11 +19,11 @@ var _ MappedNullable = &AlertConditionSpecInline{}
 
 // AlertConditionSpecInline struct for AlertConditionSpecInline
 type AlertConditionSpecInline struct {
-	Kind           *string    `json:"kind,omitempty"`
-	Op             *Operation `json:"op,omitempty"`
-	Threshold      *float32   `json:"threshold,omitempty"`
-	LoopbackWindow *string    `json:"loopbackWindow,omitempty" validate:"regexp=^[1-9][0-9]*[mhdwMQY]$"`
-	AlertAfter     *string    `json:"alertAfter,omitempty" validate:"regexp=^[1-9][0-9]*[mhdwMQY]$"`
+	Kind           *AlertConditionSpecInlineKind `json:"kind,omitempty"`
+	Op             *Operation                    `json:"op,omitempty"`
+	Threshold      *float32                      `json:"threshold,omitempty"`
+	LoopbackWindow *string                       `json:"loopbackWindow,omitempty" validate:"regexp=^[1-9][0-9]*[mhdwMQY]$"`
+	AlertAfter     *string                       `json:"alertAfter,omitempty" validate:"regexp=^[1-9][0-9]*[mhdwMQY]$"`
 }
 
 // NewAlertConditionSpecInline instantiates a new AlertConditionSpecInline object
@@ -44,9 +44,9 @@ func NewAlertConditionSpecInlineWithDefaults() *AlertConditionSpecInline {
 }
 
 // GetKind returns the Kind field value if set, zero value otherwise.
-func (o *AlertConditionSpecInline) GetKind() string {
+func (o *AlertConditionSpecInline) GetKind() AlertConditionSpecInlineKind {
 	if o == nil || IsNil(o.Kind) {
-		var ret string
+		var ret AlertConditionSpecInlineKind
 		return ret
 	}
 	return *o.Kind
@@ -54,7 +54,7 @@ func (o *AlertConditionSpecInline) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AlertConditionSpecInline) GetKindOk() (*string, bool) {
+func (o *AlertConditionSpecInline) GetKindOk() (*AlertConditionSpecInlineKind, bool) {
 	if o == nil || IsNil(o.Kind) {
 		return nil, false
 	}
@@ -70,8 +70,8 @@ func (o *AlertConditionSpecInline) HasKind() bool {
 	return false
 }
 
-// SetKind gets a reference to the given string and assigns it to the Kind field.
-func (o *AlertConditionSpecInline) SetKind(v string) {
+// SetKind gets a reference to the given AlertConditionSpecInlineKind and assigns it to the Kind field.
+func (o *AlertConditionSpecInline) SetKind(v AlertConditionSpecInlineKind) {
 	o.Kind = &v
 }
 

@@ -22,7 +22,7 @@ var _ MappedNullable = &AlertPolicy{}
 // AlertPolicy struct for AlertPolicy
 type AlertPolicy struct {
 	ApiVersion OpensloApiVersion `json:"apiVersion"`
-	Kind       string            `json:"kind"`
+	Kind       AlertPolicyKind   `json:"kind"`
 	Metadata   Metadata          `json:"metadata"`
 	Spec       *AlertPolicySpec  `json:"spec,omitempty"`
 }
@@ -33,7 +33,7 @@ type _AlertPolicy AlertPolicy
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertPolicy(apiVersion OpensloApiVersion, kind string, metadata Metadata) *AlertPolicy {
+func NewAlertPolicy(apiVersion OpensloApiVersion, kind AlertPolicyKind, metadata Metadata) *AlertPolicy {
 	this := AlertPolicy{}
 	this.ApiVersion = apiVersion
 	this.Kind = kind
@@ -74,9 +74,9 @@ func (o *AlertPolicy) SetApiVersion(v OpensloApiVersion) {
 }
 
 // GetKind returns the Kind field value
-func (o *AlertPolicy) GetKind() string {
+func (o *AlertPolicy) GetKind() AlertPolicyKind {
 	if o == nil {
-		var ret string
+		var ret AlertPolicyKind
 		return ret
 	}
 
@@ -85,7 +85,7 @@ func (o *AlertPolicy) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *AlertPolicy) GetKindOk() (*string, bool) {
+func (o *AlertPolicy) GetKindOk() (*AlertPolicyKind, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -93,7 +93,7 @@ func (o *AlertPolicy) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *AlertPolicy) SetKind(v string) {
+func (o *AlertPolicy) SetKind(v AlertPolicyKind) {
 	o.Kind = v
 }
 

@@ -22,7 +22,7 @@ var _ MappedNullable = &Service{}
 // Service struct for Service
 type Service struct {
 	ApiVersion OpensloApiVersion `json:"apiVersion"`
-	Kind       string            `json:"kind"`
+	Kind       ServiceKind       `json:"kind"`
 	Metadata   Metadata          `json:"metadata"`
 	Spec       *ServiceSpec      `json:"spec,omitempty"`
 }
@@ -33,7 +33,7 @@ type _Service Service
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewService(apiVersion OpensloApiVersion, kind string, metadata Metadata) *Service {
+func NewService(apiVersion OpensloApiVersion, kind ServiceKind, metadata Metadata) *Service {
 	this := Service{}
 	this.ApiVersion = apiVersion
 	this.Kind = kind
@@ -74,9 +74,9 @@ func (o *Service) SetApiVersion(v OpensloApiVersion) {
 }
 
 // GetKind returns the Kind field value
-func (o *Service) GetKind() string {
+func (o *Service) GetKind() ServiceKind {
 	if o == nil {
-		var ret string
+		var ret ServiceKind
 		return ret
 	}
 
@@ -85,7 +85,7 @@ func (o *Service) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *Service) GetKindOk() (*string, bool) {
+func (o *Service) GetKindOk() (*ServiceKind, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -93,7 +93,7 @@ func (o *Service) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *Service) SetKind(v string) {
+func (o *Service) SetKind(v ServiceKind) {
 	o.Kind = v
 }
 

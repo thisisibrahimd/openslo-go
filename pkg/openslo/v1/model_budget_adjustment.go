@@ -22,7 +22,7 @@ var _ MappedNullable = &BudgetAdjustment{}
 // BudgetAdjustment struct for BudgetAdjustment
 type BudgetAdjustment struct {
 	ApiVersion OpensloApiVersion     `json:"apiVersion"`
-	Kind       string                `json:"kind"`
+	Kind       BudgetAdjustmentKind  `json:"kind"`
 	Metadata   Metadata              `json:"metadata"`
 	Spec       *BudgetAdjustmentSpec `json:"spec,omitempty"`
 }
@@ -33,7 +33,7 @@ type _BudgetAdjustment BudgetAdjustment
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBudgetAdjustment(apiVersion OpensloApiVersion, kind string, metadata Metadata) *BudgetAdjustment {
+func NewBudgetAdjustment(apiVersion OpensloApiVersion, kind BudgetAdjustmentKind, metadata Metadata) *BudgetAdjustment {
 	this := BudgetAdjustment{}
 	this.ApiVersion = apiVersion
 	this.Kind = kind
@@ -74,9 +74,9 @@ func (o *BudgetAdjustment) SetApiVersion(v OpensloApiVersion) {
 }
 
 // GetKind returns the Kind field value
-func (o *BudgetAdjustment) GetKind() string {
+func (o *BudgetAdjustment) GetKind() BudgetAdjustmentKind {
 	if o == nil {
-		var ret string
+		var ret BudgetAdjustmentKind
 		return ret
 	}
 
@@ -85,7 +85,7 @@ func (o *BudgetAdjustment) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *BudgetAdjustment) GetKindOk() (*string, bool) {
+func (o *BudgetAdjustment) GetKindOk() (*BudgetAdjustmentKind, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -93,7 +93,7 @@ func (o *BudgetAdjustment) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *BudgetAdjustment) SetKind(v string) {
+func (o *BudgetAdjustment) SetKind(v BudgetAdjustmentKind) {
 	o.Kind = v
 }
 

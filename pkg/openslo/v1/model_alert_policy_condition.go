@@ -22,7 +22,7 @@ var _ MappedNullable = &AlertPolicyCondition{}
 // AlertPolicyCondition struct for AlertPolicyCondition
 type AlertPolicyCondition struct {
 	ApiVersion   OpensloApiVersion   `json:"apiVersion"`
-	Kind         string              `json:"kind"`
+	Kind         AlertConditionKind  `json:"kind"`
 	Metadata     Metadata            `json:"metadata"`
 	Spec         *AlertConditionSpec `json:"spec,omitempty"`
 	ConditionRef *string             `json:"conditionRef,omitempty" validate:"regexp=^[a-z0-9][a-z0-9.|\\/\\\\\\\\-]*[a-z0-9]*$"`
@@ -34,7 +34,7 @@ type _AlertPolicyCondition AlertPolicyCondition
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertPolicyCondition(apiVersion OpensloApiVersion, kind string, metadata Metadata) *AlertPolicyCondition {
+func NewAlertPolicyCondition(apiVersion OpensloApiVersion, kind AlertConditionKind, metadata Metadata) *AlertPolicyCondition {
 	this := AlertPolicyCondition{}
 	this.ApiVersion = apiVersion
 	this.Kind = kind
@@ -75,9 +75,9 @@ func (o *AlertPolicyCondition) SetApiVersion(v OpensloApiVersion) {
 }
 
 // GetKind returns the Kind field value
-func (o *AlertPolicyCondition) GetKind() string {
+func (o *AlertPolicyCondition) GetKind() AlertConditionKind {
 	if o == nil {
-		var ret string
+		var ret AlertConditionKind
 		return ret
 	}
 
@@ -86,7 +86,7 @@ func (o *AlertPolicyCondition) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *AlertPolicyCondition) GetKindOk() (*string, bool) {
+func (o *AlertPolicyCondition) GetKindOk() (*AlertConditionKind, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -94,7 +94,7 @@ func (o *AlertPolicyCondition) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *AlertPolicyCondition) SetKind(v string) {
+func (o *AlertPolicyCondition) SetKind(v AlertConditionKind) {
 	o.Kind = v
 }
 

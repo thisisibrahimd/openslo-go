@@ -22,7 +22,7 @@ var _ MappedNullable = &Slo{}
 // Slo struct for Slo
 type Slo struct {
 	ApiVersion OpensloApiVersion `json:"apiVersion"`
-	Kind       string            `json:"kind"`
+	Kind       SloKind           `json:"kind"`
 	Metadata   Metadata          `json:"metadata"`
 	Spec       *SloSpec          `json:"spec,omitempty"`
 }
@@ -33,7 +33,7 @@ type _Slo Slo
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSlo(apiVersion OpensloApiVersion, kind string, metadata Metadata) *Slo {
+func NewSlo(apiVersion OpensloApiVersion, kind SloKind, metadata Metadata) *Slo {
 	this := Slo{}
 	this.ApiVersion = apiVersion
 	this.Kind = kind
@@ -74,9 +74,9 @@ func (o *Slo) SetApiVersion(v OpensloApiVersion) {
 }
 
 // GetKind returns the Kind field value
-func (o *Slo) GetKind() string {
+func (o *Slo) GetKind() SloKind {
 	if o == nil {
-		var ret string
+		var ret SloKind
 		return ret
 	}
 
@@ -85,7 +85,7 @@ func (o *Slo) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *Slo) GetKindOk() (*string, bool) {
+func (o *Slo) GetKindOk() (*SloKind, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -93,7 +93,7 @@ func (o *Slo) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *Slo) SetKind(v string) {
+func (o *Slo) SetKind(v SloKind) {
 	o.Kind = v
 }
 

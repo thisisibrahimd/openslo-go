@@ -22,7 +22,7 @@ var _ MappedNullable = &AlertCondition{}
 // AlertCondition struct for AlertCondition
 type AlertCondition struct {
 	ApiVersion OpensloApiVersion   `json:"apiVersion"`
-	Kind       string              `json:"kind"`
+	Kind       AlertConditionKind  `json:"kind"`
 	Metadata   Metadata            `json:"metadata"`
 	Spec       *AlertConditionSpec `json:"spec,omitempty"`
 }
@@ -33,7 +33,7 @@ type _AlertCondition AlertCondition
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertCondition(apiVersion OpensloApiVersion, kind string, metadata Metadata) *AlertCondition {
+func NewAlertCondition(apiVersion OpensloApiVersion, kind AlertConditionKind, metadata Metadata) *AlertCondition {
 	this := AlertCondition{}
 	this.ApiVersion = apiVersion
 	this.Kind = kind
@@ -74,9 +74,9 @@ func (o *AlertCondition) SetApiVersion(v OpensloApiVersion) {
 }
 
 // GetKind returns the Kind field value
-func (o *AlertCondition) GetKind() string {
+func (o *AlertCondition) GetKind() AlertConditionKind {
 	if o == nil {
-		var ret string
+		var ret AlertConditionKind
 		return ret
 	}
 
@@ -85,7 +85,7 @@ func (o *AlertCondition) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *AlertCondition) GetKindOk() (*string, bool) {
+func (o *AlertCondition) GetKindOk() (*AlertConditionKind, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -93,7 +93,7 @@ func (o *AlertCondition) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *AlertCondition) SetKind(v string) {
+func (o *AlertCondition) SetKind(v AlertConditionKind) {
 	o.Kind = v
 }
 

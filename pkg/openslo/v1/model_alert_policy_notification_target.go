@@ -22,7 +22,7 @@ var _ MappedNullable = &AlertPolicyNotificationTarget{}
 // AlertPolicyNotificationTarget struct for AlertPolicyNotificationTarget
 type AlertPolicyNotificationTarget struct {
 	ApiVersion OpensloApiVersion            `json:"apiVersion"`
-	Kind       string                       `json:"kind"`
+	Kind       AlertNotificationTargetKind  `json:"kind"`
 	Metadata   Metadata                     `json:"metadata"`
 	Spec       *AlertNotificationTargetSpec `json:"spec,omitempty"`
 	TargetRef  *string                      `json:"targetRef,omitempty" validate:"regexp=^[a-z0-9][a-z0-9.|\\/\\\\\\\\-]*[a-z0-9]*$"`
@@ -34,7 +34,7 @@ type _AlertPolicyNotificationTarget AlertPolicyNotificationTarget
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertPolicyNotificationTarget(apiVersion OpensloApiVersion, kind string, metadata Metadata) *AlertPolicyNotificationTarget {
+func NewAlertPolicyNotificationTarget(apiVersion OpensloApiVersion, kind AlertNotificationTargetKind, metadata Metadata) *AlertPolicyNotificationTarget {
 	this := AlertPolicyNotificationTarget{}
 	this.ApiVersion = apiVersion
 	this.Kind = kind
@@ -75,9 +75,9 @@ func (o *AlertPolicyNotificationTarget) SetApiVersion(v OpensloApiVersion) {
 }
 
 // GetKind returns the Kind field value
-func (o *AlertPolicyNotificationTarget) GetKind() string {
+func (o *AlertPolicyNotificationTarget) GetKind() AlertNotificationTargetKind {
 	if o == nil {
-		var ret string
+		var ret AlertNotificationTargetKind
 		return ret
 	}
 
@@ -86,7 +86,7 @@ func (o *AlertPolicyNotificationTarget) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *AlertPolicyNotificationTarget) GetKindOk() (*string, bool) {
+func (o *AlertPolicyNotificationTarget) GetKindOk() (*AlertNotificationTargetKind, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -94,7 +94,7 @@ func (o *AlertPolicyNotificationTarget) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *AlertPolicyNotificationTarget) SetKind(v string) {
+func (o *AlertPolicyNotificationTarget) SetKind(v AlertNotificationTargetKind) {
 	o.Kind = v
 }
 

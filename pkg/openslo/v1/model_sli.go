@@ -22,7 +22,7 @@ var _ MappedNullable = &Sli{}
 // Sli struct for Sli
 type Sli struct {
 	ApiVersion OpensloApiVersion `json:"apiVersion"`
-	Kind       string            `json:"kind"`
+	Kind       SliKind           `json:"kind"`
 	Metadata   Metadata          `json:"metadata"`
 	Spec       *SliSpec          `json:"spec,omitempty"`
 }
@@ -33,7 +33,7 @@ type _Sli Sli
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSli(apiVersion OpensloApiVersion, kind string, metadata Metadata) *Sli {
+func NewSli(apiVersion OpensloApiVersion, kind SliKind, metadata Metadata) *Sli {
 	this := Sli{}
 	this.ApiVersion = apiVersion
 	this.Kind = kind
@@ -74,9 +74,9 @@ func (o *Sli) SetApiVersion(v OpensloApiVersion) {
 }
 
 // GetKind returns the Kind field value
-func (o *Sli) GetKind() string {
+func (o *Sli) GetKind() SliKind {
 	if o == nil {
-		var ret string
+		var ret SliKind
 		return ret
 	}
 
@@ -85,7 +85,7 @@ func (o *Sli) GetKind() string {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *Sli) GetKindOk() (*string, bool) {
+func (o *Sli) GetKindOk() (*SliKind, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -93,7 +93,7 @@ func (o *Sli) GetKindOk() (*string, bool) {
 }
 
 // SetKind sets field value
-func (o *Sli) SetKind(v string) {
+func (o *Sli) SetKind(v SliKind) {
 	o.Kind = v
 }
 
