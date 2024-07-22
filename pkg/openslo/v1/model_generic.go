@@ -11,7 +11,9 @@ API version: 1.0.0
 package openslo_v1
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the Generic type satisfies the MappedNullable interface at compile time
@@ -19,18 +21,24 @@ var _ MappedNullable = &Generic{}
 
 // Generic struct for Generic
 type Generic struct {
-	ApiVersion *OpensloApiVersion     `json:"apiVersion,omitempty"`
-	Kind       *string                `json:"kind,omitempty"`
-	Metadata   *Metadata              `json:"metadata,omitempty"`
-	Spec       map[string]interface{} `json:"spec,omitempty"`
+	ApiVersion OpensloApiVersion      `json:"apiVersion"`
+	Kind       string                 `json:"kind"`
+	Metadata   Metadata               `json:"metadata"`
+	Spec       map[string]interface{} `json:"spec"`
 }
+
+type _Generic Generic
 
 // NewGeneric instantiates a new Generic object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGeneric() *Generic {
+func NewGeneric(apiVersion OpensloApiVersion, kind string, metadata Metadata, spec map[string]interface{}) *Generic {
 	this := Generic{}
+	this.ApiVersion = apiVersion
+	this.Kind = kind
+	this.Metadata = metadata
+	this.Spec = spec
 	return &this
 }
 
@@ -42,130 +50,98 @@ func NewGenericWithDefaults() *Generic {
 	return &this
 }
 
-// GetApiVersion returns the ApiVersion field value if set, zero value otherwise.
+// GetApiVersion returns the ApiVersion field value
 func (o *Generic) GetApiVersion() OpensloApiVersion {
-	if o == nil || IsNil(o.ApiVersion) {
+	if o == nil {
 		var ret OpensloApiVersion
 		return ret
 	}
-	return *o.ApiVersion
+
+	return o.ApiVersion
 }
 
-// GetApiVersionOk returns a tuple with the ApiVersion field value if set, nil otherwise
+// GetApiVersionOk returns a tuple with the ApiVersion field value
 // and a boolean to check if the value has been set.
 func (o *Generic) GetApiVersionOk() (*OpensloApiVersion, bool) {
-	if o == nil || IsNil(o.ApiVersion) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ApiVersion, true
+	return &o.ApiVersion, true
 }
 
-// HasApiVersion returns a boolean if a field has been set.
-func (o *Generic) HasApiVersion() bool {
-	if o != nil && !IsNil(o.ApiVersion) {
-		return true
-	}
-
-	return false
-}
-
-// SetApiVersion gets a reference to the given OpensloApiVersion and assigns it to the ApiVersion field.
+// SetApiVersion sets field value
 func (o *Generic) SetApiVersion(v OpensloApiVersion) {
-	o.ApiVersion = &v
+	o.ApiVersion = v
 }
 
-// GetKind returns the Kind field value if set, zero value otherwise.
+// GetKind returns the Kind field value
 func (o *Generic) GetKind() string {
-	if o == nil || IsNil(o.Kind) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Kind
+
+	return o.Kind
 }
 
-// GetKindOk returns a tuple with the Kind field value if set, nil otherwise
+// GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *Generic) GetKindOk() (*string, bool) {
-	if o == nil || IsNil(o.Kind) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Kind, true
+	return &o.Kind, true
 }
 
-// HasKind returns a boolean if a field has been set.
-func (o *Generic) HasKind() bool {
-	if o != nil && !IsNil(o.Kind) {
-		return true
-	}
-
-	return false
-}
-
-// SetKind gets a reference to the given string and assigns it to the Kind field.
+// SetKind sets field value
 func (o *Generic) SetKind(v string) {
-	o.Kind = &v
+	o.Kind = v
 }
 
-// GetMetadata returns the Metadata field value if set, zero value otherwise.
+// GetMetadata returns the Metadata field value
 func (o *Generic) GetMetadata() Metadata {
-	if o == nil || IsNil(o.Metadata) {
+	if o == nil {
 		var ret Metadata
 		return ret
 	}
-	return *o.Metadata
+
+	return o.Metadata
 }
 
-// GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
+// GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
 func (o *Generic) GetMetadataOk() (*Metadata, bool) {
-	if o == nil || IsNil(o.Metadata) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Metadata, true
+	return &o.Metadata, true
 }
 
-// HasMetadata returns a boolean if a field has been set.
-func (o *Generic) HasMetadata() bool {
-	if o != nil && !IsNil(o.Metadata) {
-		return true
-	}
-
-	return false
-}
-
-// SetMetadata gets a reference to the given Metadata and assigns it to the Metadata field.
+// SetMetadata sets field value
 func (o *Generic) SetMetadata(v Metadata) {
-	o.Metadata = &v
+	o.Metadata = v
 }
 
-// GetSpec returns the Spec field value if set, zero value otherwise.
+// GetSpec returns the Spec field value
 func (o *Generic) GetSpec() map[string]interface{} {
-	if o == nil || IsNil(o.Spec) {
+	if o == nil {
 		var ret map[string]interface{}
 		return ret
 	}
+
 	return o.Spec
 }
 
-// GetSpecOk returns a tuple with the Spec field value if set, nil otherwise
+// GetSpecOk returns a tuple with the Spec field value
 // and a boolean to check if the value has been set.
 func (o *Generic) GetSpecOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.Spec) {
+	if o == nil {
 		return map[string]interface{}{}, false
 	}
 	return o.Spec, true
 }
 
-// HasSpec returns a boolean if a field has been set.
-func (o *Generic) HasSpec() bool {
-	if o != nil && !IsNil(o.Spec) {
-		return true
-	}
-
-	return false
-}
-
-// SetSpec gets a reference to the given map[string]interface{} and assigns it to the Spec field.
+// SetSpec sets field value
 func (o *Generic) SetSpec(v map[string]interface{}) {
 	o.Spec = v
 }
@@ -180,19 +156,51 @@ func (o Generic) MarshalJSON() ([]byte, error) {
 
 func (o Generic) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ApiVersion) {
-		toSerialize["apiVersion"] = o.ApiVersion
-	}
-	if !IsNil(o.Kind) {
-		toSerialize["kind"] = o.Kind
-	}
-	if !IsNil(o.Metadata) {
-		toSerialize["metadata"] = o.Metadata
-	}
-	if !IsNil(o.Spec) {
-		toSerialize["spec"] = o.Spec
-	}
+	toSerialize["apiVersion"] = o.ApiVersion
+	toSerialize["kind"] = o.Kind
+	toSerialize["metadata"] = o.Metadata
+	toSerialize["spec"] = o.Spec
 	return toSerialize, nil
+}
+
+func (o *Generic) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"apiVersion",
+		"kind",
+		"metadata",
+		"spec",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varGeneric := _Generic{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varGeneric)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Generic(varGeneric)
+
+	return err
 }
 
 type NullableGeneric struct {

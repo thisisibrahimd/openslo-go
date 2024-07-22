@@ -11,7 +11,9 @@ API version: 1.0.0
 package openslo_v1
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the Service type satisfies the MappedNullable interface at compile time
@@ -19,18 +21,24 @@ var _ MappedNullable = &Service{}
 
 // Service struct for Service
 type Service struct {
-	ApiVersion *OpensloApiVersion `json:"apiVersion,omitempty"`
-	Kind       *string            `json:"kind,omitempty"`
-	Metadata   *Metadata          `json:"metadata,omitempty"`
-	Spec       *ServiceSpec       `json:"spec,omitempty"`
+	ApiVersion OpensloApiVersion `json:"apiVersion"`
+	Kind       ServiceKind       `json:"kind"`
+	Metadata   Metadata          `json:"metadata"`
+	Spec       ServiceSpec       `json:"spec"`
 }
+
+type _Service Service
 
 // NewService instantiates a new Service object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewService() *Service {
+func NewService(apiVersion OpensloApiVersion, kind ServiceKind, metadata Metadata, spec ServiceSpec) *Service {
 	this := Service{}
+	this.ApiVersion = apiVersion
+	this.Kind = kind
+	this.Metadata = metadata
+	this.Spec = spec
 	return &this
 }
 
@@ -42,132 +50,100 @@ func NewServiceWithDefaults() *Service {
 	return &this
 }
 
-// GetApiVersion returns the ApiVersion field value if set, zero value otherwise.
+// GetApiVersion returns the ApiVersion field value
 func (o *Service) GetApiVersion() OpensloApiVersion {
-	if o == nil || IsNil(o.ApiVersion) {
+	if o == nil {
 		var ret OpensloApiVersion
 		return ret
 	}
-	return *o.ApiVersion
+
+	return o.ApiVersion
 }
 
-// GetApiVersionOk returns a tuple with the ApiVersion field value if set, nil otherwise
+// GetApiVersionOk returns a tuple with the ApiVersion field value
 // and a boolean to check if the value has been set.
 func (o *Service) GetApiVersionOk() (*OpensloApiVersion, bool) {
-	if o == nil || IsNil(o.ApiVersion) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ApiVersion, true
+	return &o.ApiVersion, true
 }
 
-// HasApiVersion returns a boolean if a field has been set.
-func (o *Service) HasApiVersion() bool {
-	if o != nil && !IsNil(o.ApiVersion) {
-		return true
-	}
-
-	return false
-}
-
-// SetApiVersion gets a reference to the given OpensloApiVersion and assigns it to the ApiVersion field.
+// SetApiVersion sets field value
 func (o *Service) SetApiVersion(v OpensloApiVersion) {
-	o.ApiVersion = &v
+	o.ApiVersion = v
 }
 
-// GetKind returns the Kind field value if set, zero value otherwise.
-func (o *Service) GetKind() string {
-	if o == nil || IsNil(o.Kind) {
-		var ret string
+// GetKind returns the Kind field value
+func (o *Service) GetKind() ServiceKind {
+	if o == nil {
+		var ret ServiceKind
 		return ret
 	}
-	return *o.Kind
+
+	return o.Kind
 }
 
-// GetKindOk returns a tuple with the Kind field value if set, nil otherwise
+// GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *Service) GetKindOk() (*string, bool) {
-	if o == nil || IsNil(o.Kind) {
+func (o *Service) GetKindOk() (*ServiceKind, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Kind, true
+	return &o.Kind, true
 }
 
-// HasKind returns a boolean if a field has been set.
-func (o *Service) HasKind() bool {
-	if o != nil && !IsNil(o.Kind) {
-		return true
-	}
-
-	return false
+// SetKind sets field value
+func (o *Service) SetKind(v ServiceKind) {
+	o.Kind = v
 }
 
-// SetKind gets a reference to the given string and assigns it to the Kind field.
-func (o *Service) SetKind(v string) {
-	o.Kind = &v
-}
-
-// GetMetadata returns the Metadata field value if set, zero value otherwise.
+// GetMetadata returns the Metadata field value
 func (o *Service) GetMetadata() Metadata {
-	if o == nil || IsNil(o.Metadata) {
+	if o == nil {
 		var ret Metadata
 		return ret
 	}
-	return *o.Metadata
+
+	return o.Metadata
 }
 
-// GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
+// GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
 func (o *Service) GetMetadataOk() (*Metadata, bool) {
-	if o == nil || IsNil(o.Metadata) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Metadata, true
+	return &o.Metadata, true
 }
 
-// HasMetadata returns a boolean if a field has been set.
-func (o *Service) HasMetadata() bool {
-	if o != nil && !IsNil(o.Metadata) {
-		return true
-	}
-
-	return false
-}
-
-// SetMetadata gets a reference to the given Metadata and assigns it to the Metadata field.
+// SetMetadata sets field value
 func (o *Service) SetMetadata(v Metadata) {
-	o.Metadata = &v
+	o.Metadata = v
 }
 
-// GetSpec returns the Spec field value if set, zero value otherwise.
+// GetSpec returns the Spec field value
 func (o *Service) GetSpec() ServiceSpec {
-	if o == nil || IsNil(o.Spec) {
+	if o == nil {
 		var ret ServiceSpec
 		return ret
 	}
-	return *o.Spec
+
+	return o.Spec
 }
 
-// GetSpecOk returns a tuple with the Spec field value if set, nil otherwise
+// GetSpecOk returns a tuple with the Spec field value
 // and a boolean to check if the value has been set.
 func (o *Service) GetSpecOk() (*ServiceSpec, bool) {
-	if o == nil || IsNil(o.Spec) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Spec, true
+	return &o.Spec, true
 }
 
-// HasSpec returns a boolean if a field has been set.
-func (o *Service) HasSpec() bool {
-	if o != nil && !IsNil(o.Spec) {
-		return true
-	}
-
-	return false
-}
-
-// SetSpec gets a reference to the given ServiceSpec and assigns it to the Spec field.
+// SetSpec sets field value
 func (o *Service) SetSpec(v ServiceSpec) {
-	o.Spec = &v
+	o.Spec = v
 }
 
 func (o Service) MarshalJSON() ([]byte, error) {
@@ -180,19 +156,51 @@ func (o Service) MarshalJSON() ([]byte, error) {
 
 func (o Service) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ApiVersion) {
-		toSerialize["apiVersion"] = o.ApiVersion
-	}
-	if !IsNil(o.Kind) {
-		toSerialize["kind"] = o.Kind
-	}
-	if !IsNil(o.Metadata) {
-		toSerialize["metadata"] = o.Metadata
-	}
-	if !IsNil(o.Spec) {
-		toSerialize["spec"] = o.Spec
-	}
+	toSerialize["apiVersion"] = o.ApiVersion
+	toSerialize["kind"] = o.Kind
+	toSerialize["metadata"] = o.Metadata
+	toSerialize["spec"] = o.Spec
 	return toSerialize, nil
+}
+
+func (o *Service) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"apiVersion",
+		"kind",
+		"metadata",
+		"spec",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varService := _Service{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varService)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Service(varService)
+
+	return err
 }
 
 type NullableService struct {

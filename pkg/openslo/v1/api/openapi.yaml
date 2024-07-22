@@ -1,0 +1,511 @@
+openapi: 3.0.3
+info:
+  description: OpenSLO V1 Schema
+  title: OpenSLO V1 Schema
+  version: 1.0.0
+servers:
+- url: https://openslo.com
+paths: {}
+components:
+  schemas:
+    generic:
+      properties:
+        apiVersion:
+          $ref: '#/components/schemas/opensloApiVersion'
+        kind:
+          $ref: '#/components/schemas/generic_kind'
+        metadata:
+          $ref: '#/components/schemas/metadata'
+        spec:
+          type: object
+      required:
+      - apiVersion
+      - kind
+      - metadata
+      - spec
+      type: object
+    slo:
+      properties:
+        apiVersion:
+          $ref: '#/components/schemas/opensloApiVersion'
+        kind:
+          $ref: '#/components/schemas/slo_kind'
+        metadata:
+          $ref: '#/components/schemas/metadata'
+        spec:
+          $ref: '#/components/schemas/sloSpec'
+      required:
+      - apiVersion
+      - kind
+      - metadata
+      - spec
+      type: object
+    budgetAdjustment:
+      properties:
+        apiVersion:
+          $ref: '#/components/schemas/opensloApiVersion'
+        kind:
+          $ref: '#/components/schemas/budgetAdjustment_kind'
+        metadata:
+          $ref: '#/components/schemas/metadata'
+        spec:
+          $ref: '#/components/schemas/budgetAdjustmentSpec'
+      required:
+      - apiVersion
+      - kind
+      - metadata
+      - spec
+      type: object
+    sli:
+      properties:
+        apiVersion:
+          $ref: '#/components/schemas/opensloApiVersion'
+        kind:
+          $ref: '#/components/schemas/sli_kind'
+        metadata:
+          $ref: '#/components/schemas/metadata'
+        spec:
+          $ref: '#/components/schemas/sliSpec'
+      required:
+      - apiVersion
+      - kind
+      - metadata
+      - spec
+      type: object
+    service:
+      properties:
+        apiVersion:
+          $ref: '#/components/schemas/opensloApiVersion'
+        kind:
+          $ref: '#/components/schemas/service_kind'
+        metadata:
+          $ref: '#/components/schemas/metadata'
+        spec:
+          $ref: '#/components/schemas/serviceSpec'
+      required:
+      - apiVersion
+      - kind
+      - metadata
+      - spec
+      type: object
+    datasource:
+      properties:
+        apiVersion:
+          $ref: '#/components/schemas/opensloApiVersion'
+        kind:
+          $ref: '#/components/schemas/datasource_kind'
+        metadata:
+          $ref: '#/components/schemas/metadata'
+        spec:
+          $ref: '#/components/schemas/serviceSpec'
+      required:
+      - apiVersion
+      - kind
+      - metadata
+      - spec
+      type: object
+    alertPolicy:
+      properties:
+        apiVersion:
+          $ref: '#/components/schemas/opensloApiVersion'
+        kind:
+          $ref: '#/components/schemas/alertPolicy_kind'
+        metadata:
+          $ref: '#/components/schemas/metadata'
+        spec:
+          $ref: '#/components/schemas/alertPolicySpec'
+      required:
+      - apiVersion
+      - kind
+      - metadata
+      - spec
+      type: object
+    alertCondition:
+      properties:
+        apiVersion:
+          $ref: '#/components/schemas/opensloApiVersion'
+        kind:
+          $ref: '#/components/schemas/alertCondition_kind'
+        metadata:
+          $ref: '#/components/schemas/metadata'
+        spec:
+          $ref: '#/components/schemas/alertConditionSpec'
+      required:
+      - apiVersion
+      - kind
+      - metadata
+      - spec
+      type: object
+    alertNotificationTarget:
+      properties:
+        apiVersion:
+          $ref: '#/components/schemas/opensloApiVersion'
+        kind:
+          $ref: '#/components/schemas/alertNotificationTarget_kind'
+        metadata:
+          $ref: '#/components/schemas/metadata'
+        spec:
+          $ref: '#/components/schemas/alertNotificationTargetSpec'
+      required:
+      - apiVersion
+      - kind
+      - metadata
+      - spec
+      type: object
+    description:
+      type: string
+    duration-shorthand:
+      pattern: "^[1-9][0-9]*[mhdwMQY]$"
+      type: string
+    name:
+      pattern: "^[a-z0-9][a-z0-9.|\\/\\\\-]*[a-z0-9]*$"
+      type: string
+    labels:
+      additionalProperties:
+        type: string
+      type: object
+    annotations:
+      additionalProperties:
+        type: string
+      type: object
+    metadata:
+      properties:
+        name:
+          pattern: "^[a-z0-9][a-z0-9.|\\/\\\\-]*[a-z0-9]*$"
+          type: string
+        displayName:
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          type: object
+        annotations:
+          additionalProperties:
+            type: string
+          type: object
+      required:
+      - name
+      type: object
+    metricSource:
+      properties:
+        metricSourceRef:
+          pattern: "^[a-z0-9][a-z0-9.|\\/\\\\-]*[a-z0-9]*$"
+          type: string
+        type:
+          type: string
+        spec:
+          type: object
+      type: object
+    timeWindow:
+      properties:
+        duration:
+          pattern: "^[1-9][0-9]*[mhdwMQY]$"
+          type: string
+        calendar:
+          $ref: '#/components/schemas/TimeWindowCalendar'
+        isRolling:
+          default: true
+          type: boolean
+      required:
+      - duration
+      type: object
+    operation:
+      enum:
+      - lte
+      - gte
+      - lt
+      - gt
+      type: string
+    datasourceSpec:
+      properties:
+        type:
+          type: string
+        connectionDetails:
+          type: object
+      type: object
+    serviceSpec:
+      properties:
+        description:
+          type: string
+      type: object
+    alertNotificationTargetSpec:
+      properties:
+        target:
+          type: string
+        description:
+          type: string
+      required:
+      - target
+      type: object
+    alertConditionSpec:
+      properties:
+        description:
+          type: string
+        severity:
+          type: string
+        condition:
+          $ref: '#/components/schemas/AlertConditionSpecInline'
+      required:
+      - condition
+      - severity
+      type: object
+    alertPolicySpec:
+      properties:
+        description:
+          type: string
+        alertWhenNoData:
+          type: boolean
+        alertWhenResolved:
+          type: boolean
+        alertWhenBreaching:
+          type: boolean
+        conditions:
+          items:
+            $ref: '#/components/schemas/AlertPolicyCondition'
+          maxItems: 1
+          minItems: 1
+          title: AlertPolicyCondition
+          type: array
+        notificationTargets:
+          items:
+            $ref: '#/components/schemas/AlertPolicyNotificationTarget'
+          minItems: 1
+          title: AlertPolicyNotificationTarget
+          type: array
+      required:
+      - alertWhenBreaching
+      - alertWhenNoData
+      - alertWhenResolved
+      - conditions
+      - notificationTargets
+      type: object
+    opensloApiVersion:
+      enum:
+      - openslo/v1
+      type: string
+    sliSpec:
+      properties:
+        description:
+          type: string
+        thresholdMetric:
+          $ref: '#/components/schemas/ThresholdMetric'
+        ratioMetric:
+          $ref: '#/components/schemas/RatioMetric'
+      type: object
+    sloSpec:
+      properties:
+        description:
+          type: string
+        service:
+          pattern: "^[a-z0-9][a-z0-9.|\\/\\\\-]*[a-z0-9]*$"
+          type: string
+        indicator:
+          $ref: '#/components/schemas/SLIInline'
+        indicatorRef:
+          pattern: "^[a-z0-9][a-z0-9.|\\/\\\\-]*[a-z0-9]*$"
+          type: string
+        timeWindow:
+          $ref: '#/components/schemas/timeWindow'
+        budgetingMethod:
+          $ref: '#/components/schemas/sloSpec_budgetingMethod'
+        objectives:
+          items:
+            $ref: '#/components/schemas/SloObjective'
+          type: array
+      required:
+      - budgetingMethod
+      - objectives
+      - service
+      type: object
+    budgetAdjustmentSpec:
+      properties:
+        description:
+          type: string
+        service:
+          pattern: "^[a-z0-9][a-z0-9.|\\/\\\\-]*[a-z0-9]*$"
+          type: string
+        indicatorRef:
+          pattern: "^[a-z0-9][a-z0-9.|\\/\\\\-]*[a-z0-9]*$"
+          type: string
+        startTime:
+          format: date-time
+          type: string
+        endTime:
+          format: data-time
+          type: string
+        duration:
+          type: string
+      required:
+      - indicatorRef
+      - service
+      - startTime
+      type: object
+    generic_kind:
+      enum:
+      - SLO
+      - BudgetAdjustment
+      - SLI
+      - Service
+      - DataSource
+      - AlertCondition
+      - AlertPolicy
+      - AlertNotificationTarget
+      type: string
+    slo_kind:
+      enum:
+      - SLO
+      type: string
+    budgetAdjustment_kind:
+      enum:
+      - BudgetAdjustment
+      type: string
+    sli_kind:
+      enum:
+      - SLI
+      type: string
+    service_kind:
+      enum:
+      - Service
+      type: string
+    datasource_kind:
+      enum:
+      - Datasource
+      type: string
+    alertPolicy_kind:
+      enum:
+      - AlertPolicy
+      type: string
+    alertCondition_kind:
+      enum:
+      - AlertCondition
+      type: string
+    alertNotificationTarget_kind:
+      enum:
+      - AlertNotificationTarget
+      type: string
+    TimeWindowCalendar:
+      properties:
+        startTime:
+          pattern: "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01]) ([01]\\d|2[0-3]):[0-5]\\\
+            d:[0-5]\\d$"
+          type: string
+        timeZone:
+          pattern: "[A-Z][a-zA-Z_]+\\/[A-Z][a-zA-Z_]+"
+          type: string
+      title: TimeWindowCalendar
+      type: object
+    AlertConditionSpecInline_kind:
+      enum:
+      - burnrate
+      type: string
+    AlertConditionSpecInline:
+      properties:
+        kind:
+          $ref: '#/components/schemas/AlertConditionSpecInline_kind'
+        op:
+          $ref: '#/components/schemas/operation'
+        threshold:
+          type: number
+        loopbackWindow:
+          pattern: "^[1-9][0-9]*[mhdwMQY]$"
+          type: string
+        alertAfter:
+          pattern: "^[1-9][0-9]*[mhdwMQY]$"
+          type: string
+      title: AlertConditionSpecInline
+      type: object
+    AlertPolicyCondition:
+      allOf:
+      - $ref: '#/components/schemas/alertCondition'
+      - properties:
+          conditionRef:
+            $ref: '#/components/schemas/name'
+      type: object
+    AlertPolicyNotificationTarget:
+      allOf:
+      - $ref: '#/components/schemas/alertNotificationTarget'
+      - properties:
+          targetRef:
+            $ref: '#/components/schemas/name'
+      type: object
+    ThresholdMetric:
+      properties:
+        metricSource:
+          $ref: '#/components/schemas/metricSource'
+      title: ThresholdMetric
+      type: object
+    GoodRatioMetric:
+      properties:
+        metricSource:
+          $ref: '#/components/schemas/metricSource'
+      title: GoodRatioMetric
+      type: object
+    BadRatioMetric:
+      properties:
+        metricSource:
+          $ref: '#/components/schemas/metricSource'
+      title: BadRatioMetric
+      type: object
+    TotalRatioMetric:
+      properties:
+        metricSource:
+          $ref: '#/components/schemas/metricSource'
+      title: TotalRatioMetric
+      type: object
+    RatioMetric:
+      properties:
+        counter:
+          type: boolean
+        good:
+          $ref: '#/components/schemas/GoodRatioMetric'
+        bad:
+          $ref: '#/components/schemas/BadRatioMetric'
+        total:
+          $ref: '#/components/schemas/TotalRatioMetric'
+      title: RatioMetric
+      type: object
+    SLIInline:
+      properties:
+        metadata:
+          $ref: '#/components/schemas/metadata'
+        spec:
+          $ref: '#/components/schemas/sliSpec'
+      title: SLIInline
+      type: object
+    sloSpec_budgetingMethod:
+      enum:
+      - Occurrences
+      - Timeslices
+      type: string
+    TimeSliceWindow:
+      oneOf:
+      - exclusiveMinimum: false
+        type: number
+      - $ref: '#/components/schemas/duration-shorthand'
+      title: TimeSliceWindow
+    SloObjective:
+      properties:
+        displayName:
+          minLength: 1
+          type: string
+        op:
+          $ref: '#/components/schemas/operation'
+        value:
+          type: number
+        target:
+          exclusiveMaximum: true
+          minimum: 0
+          type: number
+        timeSliceTarget:
+          exclusiveMinimum: false
+          maximum: 1
+          type: number
+        timeSliceWindow:
+          $ref: '#/components/schemas/TimeSliceWindow'
+        alertPolicies:
+          items:
+            $ref: '#/components/schemas/name'
+          title: ObjectiveAlertPolicy
+          type: array
+      title: SloObjective
+      type: object

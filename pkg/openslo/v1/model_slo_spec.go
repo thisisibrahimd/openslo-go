@@ -21,13 +21,13 @@ var _ MappedNullable = &SloSpec{}
 
 // SloSpec struct for SloSpec
 type SloSpec struct {
-	Description     *string        `json:"description,omitempty"`
-	Service         string         `json:"service" validate:"regexp=^[a-z0-9][a-z0-9.|\\/\\\\\\\\-]*[a-z0-9]*$"`
-	Indicator       *SLIInline     `json:"indicator,omitempty"`
-	IndicatorRef    *string        `json:"indicatorRef,omitempty" validate:"regexp=^[a-z0-9][a-z0-9.|\\/\\\\\\\\-]*[a-z0-9]*$"`
-	TimeWindow      *TimeWindow    `json:"timeWindow,omitempty"`
-	BudgetingMethod string         `json:"budgetingMethod"`
-	Objectives      []SloObjective `json:"objectives"`
+	Description     *string                `json:"description,omitempty"`
+	Service         string                 `json:"service" validate:"regexp=^[a-z0-9][a-z0-9.|\\/\\\\\\\\-]*[a-z0-9]*$"`
+	Indicator       *SLIInline             `json:"indicator,omitempty"`
+	IndicatorRef    *string                `json:"indicatorRef,omitempty" validate:"regexp=^[a-z0-9][a-z0-9.|\\/\\\\\\\\-]*[a-z0-9]*$"`
+	TimeWindow      *TimeWindow            `json:"timeWindow,omitempty"`
+	BudgetingMethod SloSpecBudgetingMethod `json:"budgetingMethod"`
+	Objectives      []SloObjective         `json:"objectives"`
 }
 
 type _SloSpec SloSpec
@@ -36,7 +36,7 @@ type _SloSpec SloSpec
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSloSpec(service string, budgetingMethod string, objectives []SloObjective) *SloSpec {
+func NewSloSpec(service string, budgetingMethod SloSpecBudgetingMethod, objectives []SloObjective) *SloSpec {
 	this := SloSpec{}
 	this.Service = service
 	this.BudgetingMethod = budgetingMethod
@@ -205,9 +205,9 @@ func (o *SloSpec) SetTimeWindow(v TimeWindow) {
 }
 
 // GetBudgetingMethod returns the BudgetingMethod field value
-func (o *SloSpec) GetBudgetingMethod() string {
+func (o *SloSpec) GetBudgetingMethod() SloSpecBudgetingMethod {
 	if o == nil {
-		var ret string
+		var ret SloSpecBudgetingMethod
 		return ret
 	}
 
@@ -216,7 +216,7 @@ func (o *SloSpec) GetBudgetingMethod() string {
 
 // GetBudgetingMethodOk returns a tuple with the BudgetingMethod field value
 // and a boolean to check if the value has been set.
-func (o *SloSpec) GetBudgetingMethodOk() (*string, bool) {
+func (o *SloSpec) GetBudgetingMethodOk() (*SloSpecBudgetingMethod, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -224,7 +224,7 @@ func (o *SloSpec) GetBudgetingMethodOk() (*string, bool) {
 }
 
 // SetBudgetingMethod sets field value
-func (o *SloSpec) SetBudgetingMethod(v string) {
+func (o *SloSpec) SetBudgetingMethod(v SloSpecBudgetingMethod) {
 	o.BudgetingMethod = v
 }
 
