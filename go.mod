@@ -1,4 +1,4 @@
-module github.com/thisisibrahimd/openslo-spec
+module github.com/thisisibrahimd/openslo-go
 
 go 1.22.5
 
