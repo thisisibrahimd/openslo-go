@@ -11,7 +11,9 @@ API version: 1.0.0
 package openslo_v1
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the AlertPolicy type satisfies the MappedNullable interface at compile time
@@ -19,18 +21,23 @@ var _ MappedNullable = &AlertPolicy{}
 
 // AlertPolicy struct for AlertPolicy
 type AlertPolicy struct {
-	ApiVersion *OpensloApiVersion `json:"apiVersion,omitempty"`
-	Kind       *string            `json:"kind,omitempty"`
-	Metadata   *Metadata          `json:"metadata,omitempty"`
-	Spec       *AlertPolicySpec   `json:"spec,omitempty"`
+	ApiVersion OpensloApiVersion `json:"apiVersion"`
+	Kind       string            `json:"kind"`
+	Metadata   Metadata          `json:"metadata"`
+	Spec       *AlertPolicySpec  `json:"spec,omitempty"`
 }
+
+type _AlertPolicy AlertPolicy
 
 // NewAlertPolicy instantiates a new AlertPolicy object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertPolicy() *AlertPolicy {
+func NewAlertPolicy(apiVersion OpensloApiVersion, kind string, metadata Metadata) *AlertPolicy {
 	this := AlertPolicy{}
+	this.ApiVersion = apiVersion
+	this.Kind = kind
+	this.Metadata = metadata
 	return &this
 }
 
@@ -42,100 +49,76 @@ func NewAlertPolicyWithDefaults() *AlertPolicy {
 	return &this
 }
 
-// GetApiVersion returns the ApiVersion field value if set, zero value otherwise.
+// GetApiVersion returns the ApiVersion field value
 func (o *AlertPolicy) GetApiVersion() OpensloApiVersion {
-	if o == nil || IsNil(o.ApiVersion) {
+	if o == nil {
 		var ret OpensloApiVersion
 		return ret
 	}
-	return *o.ApiVersion
+
+	return o.ApiVersion
 }
 
-// GetApiVersionOk returns a tuple with the ApiVersion field value if set, nil otherwise
+// GetApiVersionOk returns a tuple with the ApiVersion field value
 // and a boolean to check if the value has been set.
 func (o *AlertPolicy) GetApiVersionOk() (*OpensloApiVersion, bool) {
-	if o == nil || IsNil(o.ApiVersion) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ApiVersion, true
+	return &o.ApiVersion, true
 }
 
-// HasApiVersion returns a boolean if a field has been set.
-func (o *AlertPolicy) HasApiVersion() bool {
-	if o != nil && !IsNil(o.ApiVersion) {
-		return true
-	}
-
-	return false
-}
-
-// SetApiVersion gets a reference to the given OpensloApiVersion and assigns it to the ApiVersion field.
+// SetApiVersion sets field value
 func (o *AlertPolicy) SetApiVersion(v OpensloApiVersion) {
-	o.ApiVersion = &v
+	o.ApiVersion = v
 }
 
-// GetKind returns the Kind field value if set, zero value otherwise.
+// GetKind returns the Kind field value
 func (o *AlertPolicy) GetKind() string {
-	if o == nil || IsNil(o.Kind) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Kind
+
+	return o.Kind
 }
 
-// GetKindOk returns a tuple with the Kind field value if set, nil otherwise
+// GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
 func (o *AlertPolicy) GetKindOk() (*string, bool) {
-	if o == nil || IsNil(o.Kind) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Kind, true
+	return &o.Kind, true
 }
 
-// HasKind returns a boolean if a field has been set.
-func (o *AlertPolicy) HasKind() bool {
-	if o != nil && !IsNil(o.Kind) {
-		return true
-	}
-
-	return false
-}
-
-// SetKind gets a reference to the given string and assigns it to the Kind field.
+// SetKind sets field value
 func (o *AlertPolicy) SetKind(v string) {
-	o.Kind = &v
+	o.Kind = v
 }
 
-// GetMetadata returns the Metadata field value if set, zero value otherwise.
+// GetMetadata returns the Metadata field value
 func (o *AlertPolicy) GetMetadata() Metadata {
-	if o == nil || IsNil(o.Metadata) {
+	if o == nil {
 		var ret Metadata
 		return ret
 	}
-	return *o.Metadata
+
+	return o.Metadata
 }
 
-// GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
+// GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
 func (o *AlertPolicy) GetMetadataOk() (*Metadata, bool) {
-	if o == nil || IsNil(o.Metadata) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Metadata, true
+	return &o.Metadata, true
 }
 
-// HasMetadata returns a boolean if a field has been set.
-func (o *AlertPolicy) HasMetadata() bool {
-	if o != nil && !IsNil(o.Metadata) {
-		return true
-	}
-
-	return false
-}
-
-// SetMetadata gets a reference to the given Metadata and assigns it to the Metadata field.
+// SetMetadata sets field value
 func (o *AlertPolicy) SetMetadata(v Metadata) {
-	o.Metadata = &v
+	o.Metadata = v
 }
 
 // GetSpec returns the Spec field value if set, zero value otherwise.
@@ -180,19 +163,52 @@ func (o AlertPolicy) MarshalJSON() ([]byte, error) {
 
 func (o AlertPolicy) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ApiVersion) {
-		toSerialize["apiVersion"] = o.ApiVersion
-	}
-	if !IsNil(o.Kind) {
-		toSerialize["kind"] = o.Kind
-	}
-	if !IsNil(o.Metadata) {
-		toSerialize["metadata"] = o.Metadata
-	}
+	toSerialize["apiVersion"] = o.ApiVersion
+	toSerialize["kind"] = o.Kind
+	toSerialize["metadata"] = o.Metadata
 	if !IsNil(o.Spec) {
 		toSerialize["spec"] = o.Spec
 	}
 	return toSerialize, nil
+}
+
+func (o *AlertPolicy) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"apiVersion",
+		"kind",
+		"metadata",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varAlertPolicy := _AlertPolicy{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varAlertPolicy)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AlertPolicy(varAlertPolicy)
+
+	return err
 }
 
 type NullableAlertPolicy struct {
