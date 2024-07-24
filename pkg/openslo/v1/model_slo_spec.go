@@ -25,7 +25,7 @@ type SloSpec struct {
 	Service         string                 `json:"service" validate:"regexp=^[a-z0-9][a-z0-9.|\\/\\\\\\\\-]*[a-z0-9]*$"`
 	Indicator       *SLIInline             `json:"indicator,omitempty"`
 	IndicatorRef    *string                `json:"indicatorRef,omitempty" validate:"regexp=^[a-z0-9][a-z0-9.|\\/\\\\\\\\-]*[a-z0-9]*$"`
-	TimeWindow      *TimeWindow            `json:"timeWindow,omitempty"`
+	TimeWindow      []TimeWindow           `json:"timeWindow,omitempty"`
 	BudgetingMethod SloSpecBudgetingMethod `json:"budgetingMethod"`
 	Objectives      []SloObjective         `json:"objectives"`
 }
@@ -173,17 +173,17 @@ func (o *SloSpec) SetIndicatorRef(v string) {
 }
 
 // GetTimeWindow returns the TimeWindow field value if set, zero value otherwise.
-func (o *SloSpec) GetTimeWindow() TimeWindow {
+func (o *SloSpec) GetTimeWindow() []TimeWindow {
 	if o == nil || IsNil(o.TimeWindow) {
-		var ret TimeWindow
+		var ret []TimeWindow
 		return ret
 	}
-	return *o.TimeWindow
+	return o.TimeWindow
 }
 
 // GetTimeWindowOk returns a tuple with the TimeWindow field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SloSpec) GetTimeWindowOk() (*TimeWindow, bool) {
+func (o *SloSpec) GetTimeWindowOk() ([]TimeWindow, bool) {
 	if o == nil || IsNil(o.TimeWindow) {
 		return nil, false
 	}
@@ -199,9 +199,9 @@ func (o *SloSpec) HasTimeWindow() bool {
 	return false
 }
 
-// SetTimeWindow gets a reference to the given TimeWindow and assigns it to the TimeWindow field.
-func (o *SloSpec) SetTimeWindow(v TimeWindow) {
-	o.TimeWindow = &v
+// SetTimeWindow gets a reference to the given []TimeWindow and assigns it to the TimeWindow field.
+func (o *SloSpec) SetTimeWindow(v []TimeWindow) {
+	o.TimeWindow = v
 }
 
 // GetBudgetingMethod returns the BudgetingMethod field value
